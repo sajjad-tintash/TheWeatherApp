@@ -9,45 +9,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var isOnline : Int = 1
+//    @State private var isOnline : Int = 1
+    @State var weatherData: [WeatherDataMap]
     
     var body: some View {
-        VStack() {
-            Picker("", selection: $isOnline) {
-                       Text("Online").tag(0).font(.title)
-                       Text("Offline").tag(1).font(.title)
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                Group {
-                    ForEach(0 ..< 3) { item in
-                        VStack() {
-                            Text("2020-04-01").padding()
-                            ScrollView (.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                                        VStack() {
-                                            Text("Time")
-                                            Image(systemName: "photo")
-                                            Text("Temperature")
-                                        }
-                                    }
-                                }
-                                Spacer()
-                            }.frame(height: 100)
-                        }
-                    }
-                }
-            }
+        List(0 ..< weatherData.count) { index in
+            DailySlotsView(forcastInfo: self.weatherData[index])
+            Spacer()
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(weatherData: DummyHomeData.weatherData)
     }
 }
