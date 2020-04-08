@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
 
 extension Date {
     /// Returns string for date without time components in formate *YYYY-MM-dd*
