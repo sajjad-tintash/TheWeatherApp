@@ -38,10 +38,17 @@ struct SplashView: View {
                         .foregroundColor(.white)
                         .font(.headline)
                         .fontWeight(.regular)
-                    NavigationLink(destination: homeView, isActive: $isActive, label: { EmptyView( )})
+                    NavigationLink(destination: homeView,
+                                   isActive: $isActive,
+                                   label: { EmptyView()})
                 }
                 .padding(.bottom, 100.0)
-            }.onAppear {
+                
+            }
+            .navigationBarTitle(String())
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .onAppear {
                 self.goToHomeScreen(withDelay: 2)
             }
         }
