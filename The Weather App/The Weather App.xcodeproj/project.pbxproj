@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B4052D90243F4E3D001FC3BB /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D8F243F4E3D001FC3BB /* SplashViewModel.swift */; };
+		B4052D92243F59EF001FC3BB /* OfflineWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D91243F59EF001FC3BB /* OfflineWeatherService.swift */; };
+		B4052D94243F5A71001FC3BB /* WeatherServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D93243F5A71001FC3BB /* WeatherServiceFactory.swift */; };
+		B4052D96243F5A91001FC3BB /* WeatherServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D95243F5A91001FC3BB /* WeatherServiceProtocol.swift */; };
+		B4052D98243F5ACB001FC3BB /* LiveWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D97243F5ACB001FC3BB /* LiveWeatherService.swift */; };
 		B40D12952434C33300985C4C /* ReadsJsonFromFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40D12942434C33300985C4C /* ReadsJsonFromFile.swift */; };
 		B40D12992434C44B00985C4C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40D12982434C44B00985C4C /* HomeView.swift */; };
 		B41602CB2434C1380084250D /* lahore.json in Resources */ = {isa = PBXBuildFile; fileRef = B41602B22434C1380084250D /* lahore.json */; };
@@ -67,6 +71,10 @@
 
 /* Begin PBXFileReference section */
 		B4052D8F243F4E3D001FC3BB /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		B4052D91243F59EF001FC3BB /* OfflineWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineWeatherService.swift; sourceTree = "<group>"; };
+		B4052D93243F5A71001FC3BB /* WeatherServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceFactory.swift; sourceTree = "<group>"; };
+		B4052D95243F5A91001FC3BB /* WeatherServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceProtocol.swift; sourceTree = "<group>"; };
+		B4052D97243F5ACB001FC3BB /* LiveWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveWeatherService.swift; sourceTree = "<group>"; };
 		B40D12942434C33300985C4C /* ReadsJsonFromFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadsJsonFromFile.swift; sourceTree = "<group>"; };
 		B40D12982434C44B00985C4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B41602B22434C1380084250D /* lahore.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lahore.json; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				B41602B52434C1380084250D /* OfflineCityService.swift */,
+				B4052D91243F59EF001FC3BB /* OfflineWeatherService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -239,6 +248,9 @@
 			isa = PBXGroup;
 			children = (
 				B41602C82434C1380084250D /* ImageService.swift */,
+				B4052D93243F5A71001FC3BB /* WeatherServiceFactory.swift */,
+				B4052D95243F5A91001FC3BB /* WeatherServiceProtocol.swift */,
+				B4052D97243F5ACB001FC3BB /* LiveWeatherService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -527,12 +539,15 @@
 				B41602D42434C1380084250D /* HTTPParameterEncoder.swift in Sources */,
 				B4B8E074243DFFB10007B011 /* SlotTileView.swift in Sources */,
 				B41602D82434C1380084250D /* NetworkReachability.swift in Sources */,
+				B4052D94243F5A71001FC3BB /* WeatherServiceFactory.swift in Sources */,
 				B44159A92434868900AA24D0 /* SceneDelegate.swift in Sources */,
 				B41602D72434C1380084250D /* NetworkHandler.swift in Sources */,
+				B4052D98243F5ACB001FC3BB /* LiveWeatherService.swift in Sources */,
 				B442CA892434BFF900605DAA /* ForcastResult.swift in Sources */,
 				B442CA8A2434BFF900605DAA /* Forcast.swift in Sources */,
 				B442CA772434B83100605DAA /* PresentsAlert.swift in Sources */,
 				B4304AD2243E150D00E8F77A /* SplashView.swift in Sources */,
+				B4052D92243F59EF001FC3BB /* OfflineWeatherService.swift in Sources */,
 				B41602D02434C1380084250D /* WeatherAPI.swift in Sources */,
 				B41602D62434C1380084250D /* HTTPURLParameterEncoder.swift in Sources */,
 				B4304ACF243E0D5C00E8F77A /* DummyHomeData.swift in Sources */,
@@ -540,6 +555,7 @@
 				B41602D22434C1380084250D /* Router.swift in Sources */,
 				B442CA8B2434BFF900605DAA /* Weather.swift in Sources */,
 				B4280623243E1B8A00788AE1 /* ActivityIndicator.swift in Sources */,
+				B4052D96243F5A91001FC3BB /* WeatherServiceProtocol.swift in Sources */,
 				B41602CF2434C1380084250D /* EndPointType.swift in Sources */,
 				B442CA882434BFF900605DAA /* WeatherParticular.swift in Sources */,
 				B41602D12434C1380084250D /* NetworkRouter.swift in Sources */,
