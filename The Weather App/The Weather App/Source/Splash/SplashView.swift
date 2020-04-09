@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SplashView: View {
-    
-    @State private var isActive = true
+
+    @ObservedObject private var viewModel = SplashViewModel()
     
     let gradientColors = Gradient(colors: [
         Color.green.opacity(0.6),
@@ -19,8 +20,8 @@ struct SplashView: View {
     
     var body: some View {
         Group {
-            if !self.isActive {
-                HomeView(weatherData: DummyHomeData.weatherData)
+            if self.viewModel.shouldNavigateToHome {
+                HomeView(weatherData: self.viewModel.offlineData)
             } else {
                 ZStack {
                     Rectangle()
@@ -43,16 +44,10 @@ struct SplashView: View {
                     }
                     .padding(.bottom, 100.0)
                     .onAppear {
-                        self.goToHomeScreen(withDelay: 2)
+                        self.viewModel.fetch()
                     }
                 }
             }
-        }
-    }
-    
-    func goToHomeScreen(withDelay: Double) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(withDelay)) {
-            self.isActive = false
         }
     }
 }

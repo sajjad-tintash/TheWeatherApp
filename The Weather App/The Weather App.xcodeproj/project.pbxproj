@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B4052D90243F4E3D001FC3BB /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4052D8F243F4E3D001FC3BB /* SplashViewModel.swift */; };
 		B40D12952434C33300985C4C /* ReadsJsonFromFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40D12942434C33300985C4C /* ReadsJsonFromFile.swift */; };
 		B40D12992434C44B00985C4C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40D12982434C44B00985C4C /* HomeView.swift */; };
 		B41602CB2434C1380084250D /* lahore.json in Resources */ = {isa = PBXBuildFile; fileRef = B41602B22434C1380084250D /* lahore.json */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B4052D8F243F4E3D001FC3BB /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		B40D12942434C33300985C4C /* ReadsJsonFromFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadsJsonFromFile.swift; sourceTree = "<group>"; };
 		B40D12982434C44B00985C4C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B41602B22434C1380084250D /* lahore.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lahore.json; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				B4304AD1243E150D00E8F77A /* SplashView.swift */,
+				B4052D8F243F4E3D001FC3BB /* SplashViewModel.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				B40D12952434C33300985C4C /* ReadsJsonFromFile.swift in Sources */,
 				B442CA792434BDE000605DAA /* Utility.swift in Sources */,
 				B4B8E076243E00F10007B011 /* DailySlotsView.swift in Sources */,
+				B4052D90243F4E3D001FC3BB /* SplashViewModel.swift in Sources */,
 				B442CA872434BFF900605DAA /* City.swift in Sources */,
 				B44159A72434868900AA24D0 /* AppDelegate.swift in Sources */,
 				B41602D42434C1380084250D /* HTTPParameterEncoder.swift in Sources */,

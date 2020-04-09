@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct HomeView: View {
-//    @State private var isOnline : Int = 1
     @State var weatherData: [WeatherDataMap]
     
     var body: some View {
