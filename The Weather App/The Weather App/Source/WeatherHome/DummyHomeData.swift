@@ -15,10 +15,10 @@ enum DummyHomeData {
     static let forcast: Forcast = {
         Forcast(dateInterval: nil, date: Date(), weatherParticular: particular, weather: nil)
     }()
-    static let weatherDataForOneDay: WeatherDataMap = {
-        WeatherDataMap(date: Date(),forcasts: Array(repeating: forcast, count: 5))
+    static let weatherDataForOneDay: WeatherDateMap = {
+        WeatherDateMap(date: Date(),forcasts: Array(repeating: forcast, count: 5))
     }()
-    static let weatherData: [WeatherDataMap] = {
+    static let weatherData: [WeatherDateMap] = {
         Array(repeating: weatherDataForOneDay, count: 5)
     }()
 }

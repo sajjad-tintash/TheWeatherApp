@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var weatherData: [WeatherDataMap]
+    @State var weatherData: [WeatherDateMap]
     
     var body: some View {
-        List(0 ..< weatherData.count) { index in
-            DailySlotsView(forcastInfo: self.weatherData[index])
+        List(weatherData) { item in
+            DailySlotsView(forcastInfo: item)
             Spacer()
         }
     }

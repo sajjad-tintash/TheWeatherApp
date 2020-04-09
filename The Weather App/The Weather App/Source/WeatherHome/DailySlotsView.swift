@@ -8,26 +8,27 @@
 
 import SwiftUI
 
-struct WeatherDataMap {
+struct WeatherDateMap: Identifiable {
+    let id: UUID = UUID()
     let date: Date
-    let forcasts: [Forcast?]
+    let forcasts: [Forcast]
 }
 
 struct DailySlotsView: View {
-    @State var forcastInfo: WeatherDataMap
+    @State var forcastInfo: WeatherDateMap
     
     var body: some View {
         VStack {
             Text(forcastInfo.date.dateStringWithoutTime())
                 .font(.subheadline)
                 .fontWeight(.thin)
-            ScrollView(.horizontal) {
-                HStack(spacing: 4) {
-                    ForEach(0 ..< forcastInfo.forcasts.count) { index in
-                        SlotTileView(forcast: self.forcastInfo.forcasts[index])
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(forcastInfo.forcasts) { index in
+                        SlotTileView(forcast: index)
                     }
                 }
-            }
+            }.id(UUID().uuidString)
         }
     }
 }

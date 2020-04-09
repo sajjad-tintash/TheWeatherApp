@@ -9,7 +9,8 @@
 import Foundation
 
 /// Holds the properties of a *Forcast* object from Open Weather API and confirms to *Decodable* protocol
-struct Forcast: Decodable {
+struct Forcast: Decodable, Identifiable {
+    let id: UUID = UUID()
     let dateInterval: Int?
     let date: Date?
     var weatherParticular: WeatherParticular?
