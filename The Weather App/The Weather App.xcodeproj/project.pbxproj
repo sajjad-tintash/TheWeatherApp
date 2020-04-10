@@ -28,6 +28,8 @@
 		B41602D72434C1380084250D /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41602C42434C1380084250D /* NetworkHandler.swift */; };
 		B41602D82434C1380084250D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41602C62434C1380084250D /* NetworkReachability.swift */; };
 		B41602D92434C1380084250D /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41602C82434C1380084250D /* ImageService.swift */; };
+		B41718ED2440D41B00797EAF /* DailyForcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41718EC2440D41B00797EAF /* DailyForcastViewModel.swift */; };
+		B41718EF2440D58100797EAF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41718EE2440D58100797EAF /* HomeViewModel.swift */; };
 		B4280623243E1B8A00788AE1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4280622243E1B8A00788AE1 /* ActivityIndicator.swift */; };
 		B4304ACF243E0D5C00E8F77A /* DummyHomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304ACE243E0D5C00E8F77A /* DummyHomeData.swift */; };
 		B4304AD2243E150D00E8F77A /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304AD1243E150D00E8F77A /* SplashView.swift */; };
@@ -73,6 +75,8 @@
 		B41602C42434C1380084250D /* NetworkHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		B41602C62434C1380084250D /* NetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 		B41602C82434C1380084250D /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		B41718EC2440D41B00797EAF /* DailyForcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForcastViewModel.swift; sourceTree = "<group>"; };
+		B41718EE2440D58100797EAF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B4280622243E1B8A00788AE1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B4304ACE243E0D5C00E8F77A /* DummyHomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHomeData.swift; sourceTree = "<group>"; };
 		B4304AD1243E150D00E8F77A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				B40D12982434C44B00985C4C /* HomeView.swift */,
+				B41718EE2440D58100797EAF /* HomeViewModel.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				B4C714482440AD31008ECEA3 /* DailyForcastView.swift */,
+				B41718EC2440D41B00797EAF /* DailyForcastViewModel.swift */,
 			);
 			path = DailyForcastView;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B40D12992434C44B00985C4C /* HomeView.swift in Sources */,
+				B41718ED2440D41B00797EAF /* DailyForcastViewModel.swift in Sources */,
 				B41602D32434C1380084250D /* HTTPTask.swift in Sources */,
 				B41602D92434C1380084250D /* ImageService.swift in Sources */,
 				B442CA802434BF8F00605DAA /* DecodesDataToModel.swift in Sources */,
@@ -465,6 +472,7 @@
 				B4052D96243F5A91001FC3BB /* WeatherServiceProtocol.swift in Sources */,
 				B41602CF2434C1380084250D /* EndPointType.swift in Sources */,
 				B442CA882434BFF900605DAA /* WeatherParticular.swift in Sources */,
+				B41718EF2440D58100797EAF /* HomeViewModel.swift in Sources */,
 				B41602D12434C1380084250D /* NetworkRouter.swift in Sources */,
 				B41602D52434C1380084250D /* HTTPMethod.swift in Sources */,
 				B442CA7C2434BEBF00605DAA /* Constants.swift in Sources */,

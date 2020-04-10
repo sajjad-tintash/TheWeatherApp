@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct ForcastTileView: View {
-    @State var forcast: Forcast?
     
     @ObservedObject private(set) var viewModel: ForcastTileViewModel
     

@@ -21,7 +21,7 @@ struct SplashView: View {
     var body: some View {
         Group {
             if self.viewModel.shouldNavigateToHome {
-                HomeView(weatherData: self.viewModel.offlineData)
+                HomeView(viewModel: HomeViewModel(model: viewModel.offlineData))
             } else {
                 ZStack {
                     Rectangle()
@@ -31,7 +31,6 @@ struct SplashView: View {
                         Image("logo")
                             .resizable().aspectRatio(contentMode: .fit)
                             .frame(width: 100, height: 100)
-                            //.colorMultiply(Color(#colorLiteral(red: 0.1658988893, green: 0.2430971265, blue: 0.2193600237, alpha: 1)))
                         ActivityIndicator(isAnimating: .constant(true),
                                           style: .large,
                                           color: .white)

@@ -9,11 +9,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var weatherData: [WeatherDateMap]
+
+    @ObservedObject private(set) var viewModel: HomeViewModel
     
     var body: some View {
-        List(weatherData) { item in
-            DailyForcastView(forcastInfo: item)
+        List(viewModel.model) { item in
+            DailyForcastView(viewModel: DailyForcastViewModel(model: item))
             Spacer()
         }
     }
@@ -21,6 +22,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(weatherData: DummyHomeData.weatherData)
+        HomeView(viewModel: HomeViewModel(model: DummyHomeData.weatherData))
     }
 }

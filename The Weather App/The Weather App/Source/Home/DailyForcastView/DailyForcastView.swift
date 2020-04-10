@@ -15,16 +15,17 @@ struct WeatherDateMap: Identifiable {
 }
 
 struct DailyForcastView: View {
-    @State var forcastInfo: WeatherDateMap
+
+    @ObservedObject private(set) var viewModel: DailyForcastViewModel
     
     var body: some View {
         VStack {
-            Text(forcastInfo.date.dateStringWithoutTime())
+            Text(viewModel.model.date.dateStringWithoutTime())
                 .font(.subheadline)
                 .fontWeight(.thin)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(forcastInfo.forcasts) { item in
+                    ForEach(viewModel.model.forcasts) { item in
                         ForcastTileView(viewModel: ForcastTileViewModel(model: item))
                     }
                 }
@@ -35,6 +36,6 @@ struct DailyForcastView: View {
 
 struct DailyForcastView_Previews: PreviewProvider {
     static var previews: some View {
-        DailyForcastView(forcastInfo: DummyHomeData.weatherDataForOneDay)
+        DailyForcastView(viewModel: DailyForcastViewModel(model: DummyHomeData.weatherDataForOneDay))
     }
 }
