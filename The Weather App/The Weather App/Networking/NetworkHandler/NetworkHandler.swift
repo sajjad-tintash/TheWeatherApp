@@ -56,8 +56,8 @@ extension NetworkHandler {
     /// Sends a  request for the reuested API endpoint and returns a completion closure with Data object or error string
     /// - Parameter endPoint: Must be a type confirming EndPointType protocol
     /// - Parameter completion: returns data or error string
-    func fetchData<EndPoint>(_ endPoint: EndPoint, completion: @escaping NetworkCompletionBlock) where EndPoint:EndPointType{
-        
+    @discardableResult
+    func fetchData<EndPoint>(_ endPoint: EndPoint, completion: @escaping NetworkCompletionBlock) -> URLSessionTask? where EndPoint:EndPointType{
         router.request(endPoint: endPoint as! WeatherAPI) {(data, response, error) in
             self.parseURLRequestData(data: data, response: response, error: error) { (data, error) in
                 completion(data, error)

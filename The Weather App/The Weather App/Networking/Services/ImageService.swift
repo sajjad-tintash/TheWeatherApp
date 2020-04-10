@@ -17,17 +17,23 @@ enum ImageServiceResult {
 typealias ImageCompletionBlock = (ImageServiceResult)-> ()
 
 /// Service for fetching weather icon from the network
-struct ImageService {
+class ImageService {
     var networkHandler: NetworkHandler
+    var fetchRequest: URLSessionTask?
+    
     init(_ networkHandle: NetworkHandler) {
         networkHandler = networkHandle
+    }
+    
+    func cancel() {
+        fetchRequest?.cancel()
     }
 }
 extension ImageService {
     /// Fetches the weather image  using the *WeatherAPI * *weatherImage* end point
     /// - Parameter completion: completion closure with *UIImage*  or error string
     func fetchImage(_ path: String, completion: @escaping ImageCompletionBlock) {
-        networkHandler.fetchData(WeatherAPI.weatherImage(path: path), completion: {(data, error) in
+        fetchRequest = networkHandler.fetchData(WeatherAPI.weatherImage(path: path), completion: {(data, error) in
             guard let data = data else {
                 completion(.failure(error))
                 return
