@@ -12,7 +12,7 @@ import UIKit
 class ForcastTileViewModel: ObservableObject {
     
     @Published private(set) var model: Forcast
-    @Published private(set) var image: UIImage = UIImage(systemName: "photo")
+    @Published private(set) var image: UIImage! = UIImage(systemName: "photo")
     
     init(model: Forcast) {
         self.model = model
