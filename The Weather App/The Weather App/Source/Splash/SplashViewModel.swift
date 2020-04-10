@@ -15,7 +15,9 @@ class SplashViewModel: ObservableObject {
         
     private(set) var offlineData: [WeatherDateMap] = [] {
         didSet {
-            self.shouldNavigateToHome = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
+                self?.shouldNavigateToHome = true
+            }
         }
     }
     fileprivate var weatherService: WeatherService = WeatherServiceFactory.weatherService(nil)
@@ -69,7 +71,7 @@ class SplashViewModel: ObservableObject {
             return WeatherDateMap(date: key, forcasts: value)
         }
         
-        dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date < $1.date })
+        dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date > $1.date })
         offlineData = dateWiseForcasts
     }
     
