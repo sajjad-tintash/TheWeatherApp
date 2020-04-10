@@ -24,8 +24,8 @@ struct DailyForcastView: View {
                 .fontWeight(.thin)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(forcastInfo.forcasts) { index in
-                        ForcastTileView(forcast: index)
+                    ForEach(forcastInfo.forcasts) { item in
+                        ForcastTileView(viewModel: ForcastTileViewModel(model: item))
                     }
                 }
             }.id(UUID().uuidString)

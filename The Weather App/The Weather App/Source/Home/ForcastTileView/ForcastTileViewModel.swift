@@ -11,13 +11,18 @@ import UIKit
 
 class ForcastTileViewModel: ObservableObject {
     
-    @Published private(set) var model: Forcast?
+    @Published private(set) var model: Forcast
     @Published private(set) var image: UIImage = UIImage(systemName: "photo")
     
-    func fetchImage() {
-        
+    init(model: Forcast) {
+        self.model = model
     }
     
+    func load() {
+    }
     
+    func cancel(){
+        
+    }
     
 }
