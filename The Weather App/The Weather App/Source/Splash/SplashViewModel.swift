@@ -28,15 +28,16 @@ class SplashViewModel: ObservableObject {
         }
     }
     
-    
-    
+}
+
+extension SplashViewModel {
     /// Handles Forcast Service completion block
     /// - Parameters:
     ///   - forcastResult: ForcastResult  from weather service
     ///   - error: error srting from weather service
     func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
         if let _ = error {
-//            dataFetchErrorString.value = error
+            //TODO:- propagate error
             offlineData = DummyHomeData.weatherData
         } else if let forcasts = forcastResult?.list {
             forcastMapper(forcasts)
@@ -74,5 +75,4 @@ class SplashViewModel: ObservableObject {
         dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date > $1.date })
         offlineData = dateWiseForcasts
     }
-    
 }

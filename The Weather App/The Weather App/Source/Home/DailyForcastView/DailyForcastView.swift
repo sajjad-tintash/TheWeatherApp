@@ -29,6 +29,7 @@ struct DailyForcastView: View {
                         ForcastTileView(viewModel: ForcastTileViewModel(model: item))
                     }
                 }
+                .padding(.all, 5)
             }.id(UUID().uuidString)
         }
     }

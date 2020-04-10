@@ -26,9 +26,10 @@ struct ForcastTileView: View {
                .fontWeight(.thin)
         }
         .padding(.all)
-        .background(/*@START_MENU_TOKEN@*/Color.blue/*@END_MENU_TOKEN@*/)
-        .border(Color.gray.opacity(0.5), width: 0.5)
-        .cornerRadius(8)
+        .background(Color(#colorLiteral(red: 0.6196078431, green: 0.8549019608, blue: 0.9215686275, alpha: 0.9995117188)))
+        .cornerRadius(10)
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+        .shadow(radius: 4)
         .onAppear {
             self.viewModel.load()
         }
