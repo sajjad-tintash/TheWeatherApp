@@ -48,8 +48,9 @@
 		B442CA892434BFF900605DAA /* ForcastResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442CA842434BFF900605DAA /* ForcastResult.swift */; };
 		B442CA8A2434BFF900605DAA /* Forcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442CA852434BFF900605DAA /* Forcast.swift */; };
 		B442CA8B2434BFF900605DAA /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442CA862434BFF900605DAA /* Weather.swift */; };
-		B4B8E074243DFFB10007B011 /* SlotTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B8E073243DFFB10007B011 /* SlotTileView.swift */; };
-		B4B8E076243E00F10007B011 /* DailySlotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B8E075243E00F10007B011 /* DailySlotsView.swift */; };
+		B4B8E074243DFFB10007B011 /* ForcastTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B8E073243DFFB10007B011 /* ForcastTileView.swift */; };
+		B4C714492440AD31008ECEA3 /* DailyForcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C714482440AD31008ECEA3 /* DailyForcastView.swift */; };
+		B4C7144E2440ADE8008ECEA3 /* ForcastTileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7144D2440ADE8008ECEA3 /* ForcastTileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,8 +118,9 @@
 		B442CA842434BFF900605DAA /* ForcastResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForcastResult.swift; sourceTree = "<group>"; };
 		B442CA852434BFF900605DAA /* Forcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forcast.swift; sourceTree = "<group>"; };
 		B442CA862434BFF900605DAA /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		B4B8E073243DFFB10007B011 /* SlotTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotTileView.swift; sourceTree = "<group>"; };
-		B4B8E075243E00F10007B011 /* DailySlotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySlotsView.swift; sourceTree = "<group>"; };
+		B4B8E073243DFFB10007B011 /* ForcastTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastTileView.swift; sourceTree = "<group>"; };
+		B4C714482440AD31008ECEA3 /* DailyForcastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForcastView.swift; sourceTree = "<group>"; };
+		B4C7144D2440ADE8008ECEA3 /* ForcastTileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastTileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,9 +161,9 @@
 		B40D12972434C41C00985C4C /* WeatherHome */ = {
 			isa = PBXGroup;
 			children = (
-				B40D12982434C44B00985C4C /* HomeView.swift */,
-				B4B8E075243E00F10007B011 /* DailySlotsView.swift */,
-				B4B8E073243DFFB10007B011 /* SlotTileView.swift */,
+				B4C7144B2440AD9F008ECEA3 /* ForcastTileView */,
+				B4C7144C2440ADBF008ECEA3 /* DailyForcastView */,
+				B4C7144A2440AD8E008ECEA3 /* HomeView */,
 				B4304ACE243E0D5C00E8F77A /* DummyHomeData.swift */,
 			);
 			path = WeatherHome;
@@ -393,6 +395,31 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		B4C7144A2440AD8E008ECEA3 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				B40D12982434C44B00985C4C /* HomeView.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		B4C7144B2440AD9F008ECEA3 /* ForcastTileView */ = {
+			isa = PBXGroup;
+			children = (
+				B4B8E073243DFFB10007B011 /* ForcastTileView.swift */,
+				B4C7144D2440ADE8008ECEA3 /* ForcastTileViewModel.swift */,
+			);
+			path = ForcastTileView;
+			sourceTree = "<group>";
+		};
+		B4C7144C2440ADBF008ECEA3 /* DailyForcastView */ = {
+			isa = PBXGroup;
+			children = (
+				B4C714482440AD31008ECEA3 /* DailyForcastView.swift */,
+			);
+			path = DailyForcastView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -532,18 +559,18 @@
 				B442CA802434BF8F00605DAA /* DecodesDataToModel.swift in Sources */,
 				B40D12952434C33300985C4C /* ReadsJsonFromFile.swift in Sources */,
 				B442CA792434BDE000605DAA /* Utility.swift in Sources */,
-				B4B8E076243E00F10007B011 /* DailySlotsView.swift in Sources */,
 				B4052D90243F4E3D001FC3BB /* SplashViewModel.swift in Sources */,
 				B442CA872434BFF900605DAA /* City.swift in Sources */,
 				B44159A72434868900AA24D0 /* AppDelegate.swift in Sources */,
 				B41602D42434C1380084250D /* HTTPParameterEncoder.swift in Sources */,
-				B4B8E074243DFFB10007B011 /* SlotTileView.swift in Sources */,
+				B4B8E074243DFFB10007B011 /* ForcastTileView.swift in Sources */,
 				B41602D82434C1380084250D /* NetworkReachability.swift in Sources */,
 				B4052D94243F5A71001FC3BB /* WeatherServiceFactory.swift in Sources */,
 				B44159A92434868900AA24D0 /* SceneDelegate.swift in Sources */,
 				B41602D72434C1380084250D /* NetworkHandler.swift in Sources */,
 				B4052D98243F5ACB001FC3BB /* LiveWeatherService.swift in Sources */,
 				B442CA892434BFF900605DAA /* ForcastResult.swift in Sources */,
+				B4C7144E2440ADE8008ECEA3 /* ForcastTileViewModel.swift in Sources */,
 				B442CA8A2434BFF900605DAA /* Forcast.swift in Sources */,
 				B442CA772434B83100605DAA /* PresentsAlert.swift in Sources */,
 				B4304AD2243E150D00E8F77A /* SplashView.swift in Sources */,
@@ -552,6 +579,7 @@
 				B41602D62434C1380084250D /* HTTPURLParameterEncoder.swift in Sources */,
 				B4304ACF243E0D5C00E8F77A /* DummyHomeData.swift in Sources */,
 				B41602CD2434C1380084250D /* OfflineCityService.swift in Sources */,
+				B4C714492440AD31008ECEA3 /* DailyForcastView.swift in Sources */,
 				B41602D22434C1380084250D /* Router.swift in Sources */,
 				B442CA8B2434BFF900605DAA /* Weather.swift in Sources */,
 				B4280623243E1B8A00788AE1 /* ActivityIndicator.swift in Sources */,

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Gyk-nu-fc1">
-                                <rect key="frame" x="131.5" y="277.5" width="112.5" height="112.50000000000006"/>
+                                <rect key="frame" x="131.5" y="277.5" width="112.5" height="112.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Gyk-nu-fc1" secondAttribute="height" multiplier="1:1" id="Cwg-95-v0O"/>
                                 </constraints>

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SlotTileView: View {
+struct ForcastTileView: View {
     @State var forcast: Forcast?
     
     var body: some View {
@@ -32,8 +32,8 @@ struct SlotTileView: View {
     }
 }
 
-struct SlotTileView_Previews: PreviewProvider {
+struct ForcastTileView_Previews: PreviewProvider {
     static var previews: some View {
-        SlotTileView(forcast: DummyHomeData.forcast)
+        ForcastTileView(forcast: DummyHomeData.forcast)
     }
 }

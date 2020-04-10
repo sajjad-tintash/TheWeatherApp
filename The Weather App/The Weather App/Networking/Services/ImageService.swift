@@ -9,7 +9,12 @@
 import Foundation
 import UIKit
 
-typealias ImageCompletionBlock = (_ image: UIImage?,_ error: String?)-> ()
+enum ImageServiceResult {
+    case success(UIImage)
+    case failure(String?)
+}
+
+typealias ImageCompletionBlock = (ImageServiceResult)-> ()
 
 /// Service for fetching weather icon from the network
 struct ImageService {
@@ -24,13 +29,13 @@ extension ImageService {
     func fetchImage(_ path: String, completion: @escaping ImageCompletionBlock) {
         networkHandler.fetchData(WeatherAPI.weatherImage(path: path), completion: {(data, error) in
             guard let data = data else {
-                completion(nil,error)
+                completion(.failure(error))
                 return
             }
             if let image = UIImage(data: data) {
-                completion(image, nil)
+                completion(.success(image))
             } else {
-                completion(nil, NetworkResponse.unableToDecode.rawValue)
+                completion(.failure(NetworkResponse.unableToDecode.rawValue))
             }
         })
     }

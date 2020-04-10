@@ -14,7 +14,7 @@ struct WeatherDateMap: Identifiable {
     let forcasts: [Forcast]
 }
 
-struct DailySlotsView: View {
+struct DailyForcastView: View {
     @State var forcastInfo: WeatherDateMap
     
     var body: some View {
@@ -25,7 +25,7 @@ struct DailySlotsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(forcastInfo.forcasts) { index in
-                        SlotTileView(forcast: index)
+                        ForcastTileView(forcast: index)
                     }
                 }
             }.id(UUID().uuidString)
@@ -33,8 +33,8 @@ struct DailySlotsView: View {
     }
 }
 
-struct DailySlotsView_Previews: PreviewProvider {
+struct DailyForcastView_Previews: PreviewProvider {
     static var previews: some View {
-        DailySlotsView(forcastInfo: DummyHomeData.weatherDataForOneDay)
+        DailyForcastView(forcastInfo: DummyHomeData.weatherDataForOneDay)
     }
 }

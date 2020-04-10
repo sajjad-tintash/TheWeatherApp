@@ -13,7 +13,7 @@ struct HomeView: View {
     
     var body: some View {
         List(weatherData) { item in
-            DailySlotsView(forcastInfo: item)
+            DailyForcastView(forcastInfo: item)
             Spacer()
         }
     }
