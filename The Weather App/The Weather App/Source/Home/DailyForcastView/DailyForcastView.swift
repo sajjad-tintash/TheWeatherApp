@@ -32,6 +32,8 @@ struct DailyForcastView: View {
                 .padding(.all, 5)
             }.id(UUID().uuidString)
         }
+        .padding(.leading, -14)
+        .padding(.trailing, -24)
     }
 }
 
