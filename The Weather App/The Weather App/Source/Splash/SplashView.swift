@@ -25,7 +25,7 @@ struct SplashView: View {
             } else {
                 ZStack {
                     Rectangle()
-                        .fill(Color(#colorLiteral(red: 0.6666666667, green: 0.8509803922, blue: 0.9137254902, alpha: 1)))
+                        .fill(Colors.themeColor)
                         .edgesIgnoringSafeArea(.top)
                     VStack(alignment: .center) {
                         Image("logo")

@@ -26,7 +26,7 @@ struct ForcastTileView: View {
                .fontWeight(.thin)
         }
         .padding(.all)
-        .background(Color(#colorLiteral(red: 0.6196078431, green: 0.8549019608, blue: 0.9215686275, alpha: 0.9995117188)))
+        .background(Colors.themeColor)
         .cornerRadius(10)
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
         .shadow(radius: 4)

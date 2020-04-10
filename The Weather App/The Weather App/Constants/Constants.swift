@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 /// Holds constants for Open Weather API
 enum WeatherAPIKey {
@@ -19,4 +20,8 @@ enum WeatherAPIKey {
 enum NotificationNames {
     static let networkReachability = "networkReachability"
     static let kCFLocaleTemperatureUnitKey = "kCFLocaleTemperatureUnitKey"
+}
+
+enum Colors {
+    static let themeColor = Color(#colorLiteral(red: 0.6666666667, green: 0.8509803922, blue: 0.9137254902, alpha: 1))
 }
