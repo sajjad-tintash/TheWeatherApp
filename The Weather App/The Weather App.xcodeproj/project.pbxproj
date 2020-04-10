@@ -80,7 +80,7 @@
 		B4280622243E1B8A00788AE1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B4304ACE243E0D5C00E8F77A /* DummyHomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyHomeData.swift; sourceTree = "<group>"; };
 		B4304AD1243E150D00E8F77A /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		B44159A32434868900AA24D0 /* The Weather App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Weather App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B44159A32434868900AA24D0 /* WForcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WForcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44159A62434868900AA24D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B44159A82434868900AA24D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B44159AC2434868B00AA24D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 		B44159A42434868900AA24D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B44159A32434868900AA24D0 /* The Weather App.app */,
+				B44159A32434868900AA24D0 /* WForcast.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			);
 			name = "The Weather App";
 			productName = "The Weather App";
-			productReference = B44159A32434868900AA24D0 /* The Weather App.app */;
+			productReference = B44159A32434868900AA24D0 /* WForcast.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -624,7 +624,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.theweatherapp.The-Weather-App";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WForcast;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
@@ -647,7 +647,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.theweatherapp.The-Weather-App";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WForcast;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_DISABLE_SAFETY_CHECKS = YES;
 				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
