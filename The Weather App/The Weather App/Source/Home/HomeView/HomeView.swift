@@ -19,7 +19,7 @@ struct HomeView: View {
                     .resizable()
                     .frame(width: 12, height: 12, alignment: .trailing)
                     .padding(.leading)
-                Text(viewModel.model.cityFullName)
+                Text((viewModel.model.city?.name ?? "") + ((viewModel.model.city?.country == nil) ? "" : ", \(viewModel.model.city?.country ?? "")"))
                     .font(.headline)
                     .fontWeight(.light)
                 Spacer()

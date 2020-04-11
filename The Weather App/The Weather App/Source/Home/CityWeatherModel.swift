@@ -17,8 +17,4 @@ struct WeatherDateMap: Identifiable {
 struct CityWeatherModel {
     var weatherDateMap: [WeatherDateMap]
     var city: City?
-    
-    var cityFullName: String {
-        return city?.fullName ?? ""
-    }
 }
