@@ -25,6 +25,13 @@ extension Date {
         dateFormatter.dateFormat = "h:mm a"
         return dateFormatter.string(from: self)
     }
+    
+    func dayAndDateStringWithoutTime() -> String {
+        let dateWithoutTime = dateStringWithoutTime()
+        let weekDay = Calendar.current.component(.weekday, from: self)
+        let weekDayName = DateFormatter().shortWeekdaySymbols[weekDay-1]
+        return weekDayName + ", " + dateWithoutTime
+    }
 }
 extension String {
     /// Returns date for string without time components in formate *YYYY-MM-dd*.

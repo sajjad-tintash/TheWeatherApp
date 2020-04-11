@@ -23,5 +23,5 @@ enum NotificationNames {
 }
 
 enum Colors {
-    static let themeColor = Color(#colorLiteral(red: 0.6666666667, green: 0.8509803922, blue: 0.9137254902, alpha: 1))
+    static let themeColor = Color("basic-background")
 }

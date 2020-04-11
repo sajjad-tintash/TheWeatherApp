@@ -20,7 +20,7 @@ struct DailyForcastView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.model.date.dateStringWithoutTime())
+            Text(viewModel.model.date.dayAndDateStringWithoutTime())
                 .font(.subheadline)
                 .fontWeight(.thin)
             ScrollView(.horizontal, showsIndicators: false) {

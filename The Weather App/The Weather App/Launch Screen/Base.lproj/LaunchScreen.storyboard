@@ -3,6 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +23,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.61838376522064209" green="0.85621267557144165" blue="0.92236846685409546" alpha="0.99951171875" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="basic-background"/>
                         <constraints>
                             <constraint firstItem="Gyk-nu-fc1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4XP-66-FcB"/>
                             <constraint firstItem="Gyk-nu-fc1" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.3" id="CHt-sp-jvK"/>
@@ -38,5 +39,8 @@
     </scenes>
     <resources>
         <image name="logo" width="233.5" height="206"/>
+        <namedColor name="basic-background">
+            <color red="0.61960784313725492" green="0.85490196078431369" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
