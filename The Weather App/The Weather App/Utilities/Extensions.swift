@@ -51,3 +51,14 @@ extension Double {
         return String(format: "%\(f)f", self)
     }
 }
+
+
+extension View {
+    func inExpandingRectangle() -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.clear)
+            self
+        }
+    }
+}

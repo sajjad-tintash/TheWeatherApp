@@ -18,7 +18,8 @@ enum DummyHomeData {
     static let weatherDataForOneDay: WeatherDateMap = {
         WeatherDateMap(date: Date(),forcasts: Array(repeating: forcast, count: 5))
     }()
-    static let weatherData: [WeatherDateMap] = {
-        Array(repeating: weatherDataForOneDay, count: 5)
+    static let cityWeatherModel: CityWeatherModel = {
+        CityWeatherModel(weatherDateMap: Array(repeating: weatherDataForOneDay, count: 5),
+                         city: City(id: 1172451, name: "Lahore", country: "PK"))
     }()
 }

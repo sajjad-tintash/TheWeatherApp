@@ -8,12 +8,6 @@
 
 import SwiftUI
 
-struct WeatherDateMap: Identifiable {
-    let id: UUID = UUID()
-    let date: Date
-    let forcasts: [Forcast]
-}
-
 struct DailyForcastView: View {
 
     @ObservedObject private(set) var viewModel: DailyForcastViewModel

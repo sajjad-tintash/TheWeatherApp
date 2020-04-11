@@ -13,7 +13,7 @@ class SplashViewModel: ObservableObject {
 
     @Published private(set) var shouldNavigateToHome: Bool = false
         
-    private(set) var offlineData: [WeatherDateMap] = [] {
+    private(set) var offlineData: CityWeatherModel = CityWeatherModel(weatherDateMap: []) {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
                 self?.shouldNavigateToHome = true
@@ -38,16 +38,17 @@ extension SplashViewModel {
     func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
         if let _ = error {
             //TODO:- propagate error
-            offlineData = DummyHomeData.weatherData
+            offlineData = DummyHomeData.cityWeatherModel
         } else if let forcasts = forcastResult?.list {
-            forcastMapper(forcasts)
+            let dateWeatherMap = forcastMapper(forcasts)
+            offlineData = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
         }
     }
     
     /// Converts Forcast data into a date wise mapping, each forcast is placed under its own day so that a specific day's data can be shown
     /// Final array is sorted on date so that most recent date is at top
     /// - Parameter forcasts: array of *Forcast* objects
-    func forcastMapper(_ forcasts: [Forcast?]) {
+    func forcastMapper(_ forcasts: [Forcast?]) -> [WeatherDateMap]{
         let forcastDict = forcasts.reduce([Date: [Forcast]]()) { (dict, forcast) -> [Date: [Forcast]] in
             var dict = dict
             let forcastDateStr = forcast?.date?.dateStringWithoutTime()
@@ -73,6 +74,6 @@ extension SplashViewModel {
         }
         
         dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date > $1.date })
-        offlineData = dateWiseForcasts
+        return dateWiseForcasts
     }
 }
