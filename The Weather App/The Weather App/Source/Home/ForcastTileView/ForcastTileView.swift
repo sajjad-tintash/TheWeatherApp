@@ -24,6 +24,10 @@ struct ForcastTileView: View {
             Text((viewModel.model.weatherParticular?.temp?.format(f: "0.2") ?? "--") + " " + Utility.getUserTempUnitSymbol())
                .font(.headline)
                .fontWeight(.thin)
+            Text(viewModel.model.weather?.first??.main ?? "MAIN")
+               .font(.caption)
+               .fontWeight(.thin)
+            
         }
         .padding(.all)
         .background(Colors.themeColor)
