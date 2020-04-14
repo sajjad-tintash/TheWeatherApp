@@ -8,16 +8,26 @@
 
 import Foundation
 
-enum AppMode: String {
-    case live = "Live", offline = "Offline"
+enum AppMode: Int, Identifiable, CaseIterable {
+    case live = 1, offline = 0
+    
+    var id: AppMode {
+        self
+    }
+    
+    var text: String {
+        return self == .live ? "Live" : "Offline"
+    }
 }
 
 class HomeViewModel: ObservableObject {
     
     @Published private(set) var model: CityWeatherModel
-    @Published private(set) var mode: AppMode = .offline
+    @Published var mode: AppMode = .offline
     
     init(model: CityWeatherModel) {
         self.model = model
     }
+    
+    
 }

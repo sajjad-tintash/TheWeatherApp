@@ -11,6 +11,7 @@ import SwiftUI
 struct HomeView: View {
 
     @ObservedObject private(set) var viewModel: HomeViewModel
+    @State private var favoriteColor = 0
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -26,12 +27,20 @@ struct HomeView: View {
                 Circle()
                     .frame(width: 8, height: 8, alignment: .trailing)
                     .foregroundColor(viewModel.mode == .offline ? .red : .green)
-                Text(viewModel.mode.rawValue)
+                Text(viewModel.mode.text)
                     .font(.headline)
                     .fontWeight(.light)
                     .padding(.trailing)
             }
             .padding(.vertical)
+            Picker(selection: $viewModel.mode, label: Text("")) {
+                Text("Live")
+                    .fontWeight(.light)
+                    .tag(AppMode.live)
+                Text("Offline")
+                    .fontWeight(.light)
+                    .tag(AppMode.offline)
+            }.pickerStyle(SegmentedPickerStyle())
             List(viewModel.model.weatherDateMap) { item in
                 DailyForcastView(viewModel: DailyForcastViewModel(model: item))
                 Spacer()
