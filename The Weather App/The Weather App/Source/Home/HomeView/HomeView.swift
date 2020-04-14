@@ -9,10 +9,8 @@
 import SwiftUI
 
 struct HomeView: View {
-
     @ObservedObject private(set) var viewModel: HomeViewModel
-    @State private var favoriteColor = 0
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -33,14 +31,19 @@ struct HomeView: View {
                     .padding(.trailing)
             }
             .padding(.vertical)
-            Picker(selection: $viewModel.mode, label: Text("")) {
-                Text("Live")
-                    .fontWeight(.light)
-                    .tag(AppMode.live)
-                Text("Offline")
-                    .fontWeight(.light)
-                    .tag(AppMode.offline)
-            }.pickerStyle(SegmentedPickerStyle())
+            Group {
+                Picker(selection: $viewModel.mode, label: Text("")) {
+                    Text("Live")
+                        .fontWeight(.light)
+                        .tag(AppMode.live)
+                    Text("Offline")
+                        .fontWeight(.light)
+                        .tag(AppMode.offline)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                TextField("Search ...", text: $viewModel.searchText)
+                    .padding(.all)
+            }
             List(viewModel.model.weatherDateMap) { item in
                 DailyForcastView(viewModel: DailyForcastViewModel(model: item))
                 Spacer()

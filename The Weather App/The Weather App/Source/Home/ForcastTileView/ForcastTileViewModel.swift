@@ -12,7 +12,7 @@ import UIKit
 class ForcastTileViewModel: ObservableObject {
     
     @Published private(set) var model: Forcast
-    @Published private(set) var image: UIImage! = UIImage()
+    @Published private(set) var image: UIImage! = UIImage(systemName: "photo")
     
     fileprivate var imageService: ImageService = ImageService(NetworkHandler())
     

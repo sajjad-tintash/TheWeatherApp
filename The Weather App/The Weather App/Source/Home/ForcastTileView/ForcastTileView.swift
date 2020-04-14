@@ -18,7 +18,7 @@ struct ForcastTileView: View {
             Text(viewModel.model.date?.timeStringWithoutDate() ?? "TIME")
                .font(.subheadline)
                .fontWeight(.thin)
-            Image(uiImage: viewModel.image)
+            Image(uiImage: viewModel.image ?? UIImage())
                 .resizable()
             .frame(width: 60, height: 50, alignment: .center)
             Text((viewModel.model.weatherParticular?.temp?.format(f: "0.2") ?? "--") + " " + Utility.getUserTempUnitSymbol())
