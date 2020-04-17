@@ -18,7 +18,7 @@ struct ForcastTileView: View {
             Text(viewModel.model.date?.timeStringWithoutDate() ?? "TIME")
                .font(.subheadline)
                .fontWeight(.thin)
-            Image(uiImage: viewModel.image ?? UIImage())
+            Image(uiImage: viewModel.image)
                 .resizable()
             .frame(width: 60, height: 50, alignment: .center)
             Text((viewModel.model.weatherParticular?.temp?.format(f: "0.2") ?? "--") + " " + Utility.getUserTempUnitSymbol())
@@ -34,9 +34,6 @@ struct ForcastTileView: View {
         .cornerRadius(10)
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
         .shadow(radius: 4)
-        .onAppear {
-            self.viewModel.load()
-        }
         .onDisappear {
             self.viewModel.cancel()
         }
