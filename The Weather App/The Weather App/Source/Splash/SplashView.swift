@@ -21,7 +21,7 @@ struct SplashView: View {
     var body: some View {
         Group {
             if self.viewModel.shouldNavigateToHome {
-                HomeView(viewModel: HomeViewModel(model: viewModel.offlineData))
+                HomeView(viewModel: HomeViewModel(model: viewModel.offlineData, mode: .offline))
             } else {
                 ZStack {
                     Rectangle()

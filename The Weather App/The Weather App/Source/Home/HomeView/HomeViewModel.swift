@@ -27,10 +27,10 @@ enum AppMode: Int, Identifiable, CaseIterable {
 
 class HomeViewModel: ObservableObject {
     
-    @Published private(set) var model: CityWeatherModel
-    @Published var mode: AppMode = .offline {
-        didSet {
-            print(mode)
+    private(set) var model: CityWeatherModel
+    @Published var mode: AppMode {
+        willSet(newValue) {
+            updateModel(newValue)
         }
     }
     @Published var searchText: String = "" {
@@ -39,7 +39,22 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    init(model: CityWeatherModel) {
+    private var liveModel: CityWeatherModel?
+    private var offlineModel: CityWeatherModel?
+    
+    init(model: CityWeatherModel, mode: AppMode) {
         self.model = model
+        self.mode = mode
+        
+        liveModel = (mode == .live) ? model : nil
+        offlineModel = (mode == .offline) ? model : nil
+    }
+    
+    func updateModel(_ updatedMode: AppMode) {
+        guard let dataModel = (updatedMode == .live) ? liveModel : offlineModel else {
+            model = CityWeatherModel(weatherDateMap: [], city: nil)
+            return
+        }
+        model = dataModel
     }
 }

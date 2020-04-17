@@ -13,24 +13,28 @@ struct HomeView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "location")
-                    .resizable()
-                    .frame(width: 12, height: 12, alignment: .trailing)
-                    .padding(.leading)
-                Text((viewModel.model.city?.name ?? "") + ((viewModel.model.city?.country == nil) ? "" : ", \(viewModel.model.city?.country ?? "")"))
-                    .font(.headline)
-                    .fontWeight(.light)
-                Spacer()
-                Circle()
-                    .frame(width: 8, height: 8, alignment: .trailing)
-                    .foregroundColor(viewModel.mode == .offline ? .red : .green)
-                Text(viewModel.mode.text)
-                    .font(.headline)
-                    .fontWeight(.light)
-                    .padding(.trailing)
+            Group {
+                HStack {
+                    if viewModel.model.hasCityName {                        
+                        Image(systemName: "location")
+                            .resizable()
+                            .frame(width: 12, height: 12, alignment: .trailing)
+                            .padding(.leading)
+                    }
+                    Text(viewModel.model.cityFullName)
+                        .font(.headline)
+                        .fontWeight(.light)
+                    Spacer()
+                    Circle()
+                        .frame(width: 8, height: 8, alignment: .trailing)
+                        .foregroundColor(viewModel.mode == .offline ? .red : .green)
+                    Text(viewModel.mode.text)
+                        .font(.headline)
+                        .fontWeight(.light)
+                        .padding(.trailing)
+                }
+                .padding(.vertical)
             }
-            .padding(.vertical)
             Group {
                 Picker(selection: $viewModel.mode, label: Text("")) {
                     Text("Live")
@@ -41,12 +45,16 @@ struct HomeView: View {
                         .tag(AppMode.offline)
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                TextField("Search ...", text: $viewModel.searchText)
-                    .padding(.all)
+                if viewModel.mode == .live {
+                    TextField("Search ...", text: $viewModel.searchText)
+                        .padding(.all)
+                }
             }
-            List(viewModel.model.weatherDateMap) { item in
-                DailyForcastView(viewModel: DailyForcastViewModel(model: item))
-                Spacer()
+            Group {
+                List(viewModel.model.weatherDateMap) { item in
+                    DailyForcastView(viewModel: DailyForcastViewModel(model: item))
+                    Spacer()
+                }
             }
         }
     }
@@ -54,6 +62,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(model: DummyHomeData.cityWeatherModel))
+        HomeView(viewModel: HomeViewModel(model: DummyHomeData.cityWeatherModel, mode: .offline))
     }
 }

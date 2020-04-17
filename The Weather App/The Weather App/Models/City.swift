@@ -13,4 +13,11 @@ struct City: Decodable {
     let id: Int?
     let name: String?
     let country: String?
+    
+    var fullName: String? {
+        get {
+            guard let name = self.name else { return nil }
+            return name + ((country != nil) ? ", \(country ?? "")"  : "")
+        }
+    }
 }
