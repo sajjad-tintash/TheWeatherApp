@@ -54,7 +54,7 @@ struct HomeView: View {
                 List(viewModel.model.weatherDateMap) { item in
                     DailyForcastView(viewModel: DailyForcastViewModel(model: item))
                     Spacer()
-                }
+                }.id(UUID())
             }
         }
     }
