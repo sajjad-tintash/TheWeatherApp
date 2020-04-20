@@ -48,6 +48,13 @@ struct HomeView: View {
                 if viewModel.mode == .live {
                     TextField("Search ...", text: $viewModel.searchText)
                         .padding(.all)
+                    if !viewModel.filteredCities.isEmpty {
+                        List(viewModel.filteredCities) { city in
+                            Text(city.fullName ?? "")
+                            .fontWeight(.light)
+                        }
+                        
+                    }
                 }
             }
             Group {

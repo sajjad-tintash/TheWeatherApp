@@ -25,3 +25,24 @@ enum NotificationNames {
 enum Colors {
     static let themeColor = Color("basic-background")
 }
+
+/// Holds constants for Constraint values
+enum SearchTerm {
+    static let minimumSearchTermCharacters = 3
+}
+
+enum AppMode: Int, Identifiable, CaseIterable {
+    case live = 1, offline = 0
+    
+    var id: AppMode {
+        self
+    }
+    
+    var text: String {
+        return self == .live ? "Live" : "Offline"
+    }
+    
+    mutating func toggle() {
+        self = (self == .live ? .offline : .live)
+    }
+}

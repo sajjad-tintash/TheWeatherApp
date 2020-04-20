@@ -9,7 +9,7 @@
 import Foundation
 
 /// Holds the properties of a *City* object of  Open Weather API and confirms to *Decodable* protocol
-struct City: Decodable {
+struct City: Decodable, Identifiable {
     let id: Int?
     let name: String?
     let country: String?
