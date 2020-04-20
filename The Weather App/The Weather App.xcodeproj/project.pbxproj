@@ -49,6 +49,7 @@
 		B442CA8A2434BFF900605DAA /* Forcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442CA852434BFF900605DAA /* Forcast.swift */; };
 		B442CA8B2434BFF900605DAA /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B442CA862434BFF900605DAA /* Weather.swift */; };
 		B493E354244DCB0200235B6C /* ForcastMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493E353244DCB0200235B6C /* ForcastMappable.swift */; };
+		B493E356244DE6CD00235B6C /* RoundedCornersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493E355244DE6CD00235B6C /* RoundedCornersView.swift */; };
 		B499D38E244200FB00236537 /* CityWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499D38D244200FB00236537 /* CityWeatherModel.swift */; };
 		B4B700152449B304002BE9A6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B700142449B304002BE9A6 /* ImageCache.swift */; };
 		B4B8E074243DFFB10007B011 /* ForcastTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B8E073243DFFB10007B011 /* ForcastTileView.swift */; };
@@ -101,6 +102,7 @@
 		B442CA852434BFF900605DAA /* Forcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forcast.swift; sourceTree = "<group>"; };
 		B442CA862434BFF900605DAA /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		B493E353244DCB0200235B6C /* ForcastMappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastMappable.swift; sourceTree = "<group>"; };
+		B493E355244DE6CD00235B6C /* RoundedCornersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersView.swift; sourceTree = "<group>"; };
 		B499D38D244200FB00236537 /* CityWeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityWeatherModel.swift; sourceTree = "<group>"; };
 		B4B700142449B304002BE9A6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		B4B8E073243DFFB10007B011 /* ForcastTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastTileView.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				B4280622243E1B8A00788AE1 /* ActivityIndicator.swift */,
+				B493E355244DE6CD00235B6C /* RoundedCornersView.swift */,
 			);
 			path = CommonViews;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				B41602D32434C1380084250D /* HTTPTask.swift in Sources */,
 				B41602D92434C1380084250D /* ImageService.swift in Sources */,
 				B442CA802434BF8F00605DAA /* DecodesDataToModel.swift in Sources */,
+				B493E356244DE6CD00235B6C /* RoundedCornersView.swift in Sources */,
 				B493E354244DCB0200235B6C /* ForcastMappable.swift in Sources */,
 				B40D12952434C33300985C4C /* ReadsJsonFromFile.swift in Sources */,
 				B442CA792434BDE000605DAA /* Utility.swift in Sources */,

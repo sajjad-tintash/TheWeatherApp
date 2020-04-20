@@ -87,13 +87,17 @@ extension HomeViewModel {
         guard searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).count > SearchTerm.minimumSearchTermCharacters else { return }
         let searchTerm = searchTerm.lowercased()
         let searchResults = allCities.filter { ($0.name?.lowercased().contains(searchTerm) ?? false) }.prefix(20)
-        filteredCities = searchResults.sorted(by: {
+        var sortedList = searchResults.sorted(by: {
             guard let firstDistance = $0.fullName?.levenshteinDistanceScore(to: searchTerm),
                 let secondDistance = $1.fullName?.levenshteinDistanceScore(to: searchTerm) else {
                 return false
             }
             return firstDistance > secondDistance
         })
+        sortedList.removeAll(where: {
+            $0.id == selectedCity?.id
+        })
+        filteredCities = sortedList
     }
     
     func clearFilteredList() {
@@ -120,7 +124,7 @@ extension HomeViewModel: ForcastMappable {
     
     func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
         if let error = error {
-//            dataFetchErrorString.value = error
+            //TODO:- Propagate Error
             print(error)
         } else if let forcasts = forcastResult?.list {
             let dateWeatherMap = mapForcastsToDate(forcasts)

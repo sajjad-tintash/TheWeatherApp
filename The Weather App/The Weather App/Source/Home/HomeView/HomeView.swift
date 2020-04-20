@@ -47,16 +47,41 @@ struct HomeView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     if viewModel.mode == .live {
-                        TextField("Search ...", text: $viewModel.searchText)
-                            .padding(.all)
+                        HStack {
+                            Image(systemName: "location").foregroundColor(.gray)
+                            TextField("Search ...", text: $viewModel.searchText)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        .padding([.leading, .trailing, .top])
                         if !viewModel.filteredCities.isEmpty {
-                            List {
+                            ScrollView(.vertical) {
                                 ForEach(viewModel.filteredCities) { city in
-                                    Button(city.fullName ?? "") {
+                                    Button(action: {
                                         self.viewModel.selectCity(city)
-                                    }
+                                    }, label: {
+                                        HStack {
+                                            Text(city.fullName ?? "")
+                                                .fontWeight(.light)
+                                                .foregroundColor(.black)
+                                                .padding(.horizontal)
+                                            Spacer()
+                                        }
+                                    })
+                                    Rectangle()
+                                        .fill(Color.white).opacity(0.3)
+                                    .frame(height: 2, alignment: .bottom)
+                                    .padding(.horizontal, 40)
                                 }
+                                .padding(.top)
+                                .animation(.spring())
                             }
+                            .background(RoundedCornersView(color: .gray,
+                                                           tl: 0.0,
+                                                           tr: 0.0,
+                                                           bl: 10,
+                                                           br: 10).opacity(0.3))
+                            .padding(.leading, 40)
+                            .padding(.trailing, 20)
                         }
                     }
                 }
