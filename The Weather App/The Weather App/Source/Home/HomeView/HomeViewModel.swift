@@ -30,7 +30,15 @@ class HomeViewModel: ObservableObject {
     let offlineCityService:  OfflineCityService = OfflineCityService()
     private var allCities: [City] = []
     
+    var weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
+    
     @Published var filteredCities: [City] = []
+    var selectedCity: City? {
+        didSet {
+            searchText = ""
+            fetchWeatherForCity(selectedCity)
+        }
+    }
     
     
     //MARK:- Initializer
@@ -88,5 +96,36 @@ extension HomeViewModel {
     func clearFilteredList() {
         guard searchText.count < SearchTerm.minimumSearchTermCharacters, !filteredCities.isEmpty else { return }
         filteredCities = []
+    }
+}
+
+
+extension HomeViewModel: ForcastMappable {
+    func selectCity(_ city: City) {
+        selectedCity = city
+    }
+    
+    func fetchWeatherForCity(_ city: City?) {
+        guard let cityId = city?.id else {
+            return
+        }
+        
+        weatherService.fetchWeatherForCity(String(cityId)) { [weak self]  (forcastResult, error) in
+            self?.handlerForcastResponse(forcastResult, error: error)
+        }
+    }
+    
+    func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
+        if let error = error {
+//            dataFetchErrorString.value = error
+            print(error)
+        } else if let forcasts = forcastResult?.list {
+            let dateWeatherMap = mapForcastsToDate(forcasts)
+            liveModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+            updateModel(mode)
+            DispatchQueue.main.async {
+                self.objectWillChange.send()
+            }
+        }
     }
 }

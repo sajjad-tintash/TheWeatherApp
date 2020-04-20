@@ -49,11 +49,13 @@ struct HomeView: View {
                     TextField("Search ...", text: $viewModel.searchText)
                         .padding(.all)
                     if !viewModel.filteredCities.isEmpty {
-                        List(viewModel.filteredCities) { city in
-                            Text(city.fullName ?? "")
-                            .fontWeight(.light)
+                        List {
+                            ForEach(viewModel.filteredCities) { city in
+                                Button(city.fullName ?? "") {
+                                    self.viewModel.selectCity(city)
+                                }
+                            }
                         }
-                        
                     }
                 }
             }
