@@ -12,58 +12,67 @@ struct HomeView: View {
     @ObservedObject private(set) var viewModel: HomeViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Group {
-                HStack {
-                    if viewModel.model.hasCityName {                        
-                        Image(systemName: "location")
-                            .resizable()
-                            .frame(width: 12, height: 12, alignment: .trailing)
-                            .padding(.leading)
+        ZStack {
+            VStack(alignment: .leading) {
+                Group {
+                    HStack {
+                        if viewModel.model.hasCityName {
+                            Image(systemName: "location")
+                                .resizable()
+                                .frame(width: 12, height: 12, alignment: .trailing)
+                                .padding(.leading)
+                        }
+                        Text(viewModel.model.cityFullName)
+                            .font(.headline)
+                            .fontWeight(.light)
+                        Spacer()
+                        Circle()
+                            .frame(width: 8, height: 8, alignment: .trailing)
+                            .foregroundColor(viewModel.mode == .offline ? .red : .green)
+                        Text(viewModel.mode.text)
+                            .font(.headline)
+                            .fontWeight(.light)
+                            .padding(.trailing)
                     }
-                    Text(viewModel.model.cityFullName)
-                        .font(.headline)
-                        .fontWeight(.light)
-                    Spacer()
-                    Circle()
-                        .frame(width: 8, height: 8, alignment: .trailing)
-                        .foregroundColor(viewModel.mode == .offline ? .red : .green)
-                    Text(viewModel.mode.text)
-                        .font(.headline)
-                        .fontWeight(.light)
-                        .padding(.trailing)
+                    .padding(.vertical)
                 }
-                .padding(.vertical)
-            }
-            Group {
-                Picker(selection: $viewModel.mode, label: Text("")) {
-                    Text("Live")
-                        .fontWeight(.light)
-                        .tag(AppMode.live)
-                    Text("Offline")
-                        .fontWeight(.light)
-                        .tag(AppMode.offline)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                if viewModel.mode == .live {
-                    TextField("Search ...", text: $viewModel.searchText)
-                        .padding(.all)
-                    if !viewModel.filteredCities.isEmpty {
-                        List {
-                            ForEach(viewModel.filteredCities) { city in
-                                Button(city.fullName ?? "") {
-                                    self.viewModel.selectCity(city)
+                Group {
+                    Picker(selection: $viewModel.mode, label: Text("")) {
+                        Text("Live")
+                            .fontWeight(.light)
+                            .tag(AppMode.live)
+                        Text("Offline")
+                            .fontWeight(.light)
+                            .tag(AppMode.offline)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    if viewModel.mode == .live {
+                        TextField("Search ...", text: $viewModel.searchText)
+                            .padding(.all)
+                        if !viewModel.filteredCities.isEmpty {
+                            List {
+                                ForEach(viewModel.filteredCities) { city in
+                                    Button(city.fullName ?? "") {
+                                        self.viewModel.selectCity(city)
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                Group {
+                    List(viewModel.model.weatherDateMap) { item in
+                        DailyForcastView(viewModel: DailyForcastViewModel(model: item))
+                        Spacer()
+                    }.id(UUID())
+                }
             }
-            Group {
-                List(viewModel.model.weatherDateMap) { item in
-                    DailyForcastView(viewModel: DailyForcastViewModel(model: item))
-                    Spacer()
-                }.id(UUID())
+            if viewModel.isLoadingCity {
+                ActivityIndicator(isAnimating: $viewModel.isLoadingCity, style: .large, color: .darkGray)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.gray)
+                        .opacity(0.5)
+                        .frame(width: 100, height: 100))
             }
         }
     }

@@ -35,10 +35,13 @@ class HomeViewModel: ObservableObject {
     @Published var filteredCities: [City] = []
     var selectedCity: City? {
         didSet {
+            isLoadingCity = true
             searchText = ""
             fetchWeatherForCity(selectedCity)
         }
     }
+    
+    var isLoadingCity: Bool = false
     
     
     //MARK:- Initializer
@@ -123,6 +126,7 @@ extension HomeViewModel: ForcastMappable {
             let dateWeatherMap = mapForcastsToDate(forcasts)
             liveModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
             updateModel(mode)
+            isLoadingCity = false
             DispatchQueue.main.async {
                 self.objectWillChange.send()
             }
