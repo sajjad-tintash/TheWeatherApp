@@ -31,19 +31,21 @@ class SplashViewModel: ObservableObject {
     fileprivate var weatherService: WeatherService = WeatherServiceFactory.weatherService(nil)
         
     func fetch(){
-        if NetworkReachability.shared.isConnected {
-            let preference = PreferenceService()
-            let id = preference.getRecentSearchedCityId()  ?? WeatherAPIKey.defaultCity.id ?? 1172451
-            mode = .live
-            weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
-            weatherService.fetchWeatherForCity(String(id)) { [weak self]  result in
-                self?.handlerForcastResponse(result: result)
-            }
-        } else {
-            weatherService.fetchWeatherForCity(nil) { [weak self]  result in
-                self?.handlerForcastResponse(result: result)
-            }
-        }
+        NetworkReachability.shared.checkNetworkConnection(result: { [unowned self] (isReachable) in
+            if isReachable {
+                let preference = PreferenceService()
+                let id = preference.getRecentSearchedCityId()  ?? WeatherAPIKey.defaultCity.id ?? 1172451
+                self.mode = .live
+                self.weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
+                self.weatherService.fetchWeatherForCity(String(id)) { [weak self]  result in
+                    self?.handlerForcastResponse(result: result)
+                }
+           } else {
+                self.weatherService.fetchWeatherForCity(nil) { [weak self]  result in
+                    self?.handlerForcastResponse(result: result)
+                }
+           }
+        })
     }
 }
 

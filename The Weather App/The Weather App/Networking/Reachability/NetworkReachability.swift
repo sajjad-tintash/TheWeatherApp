@@ -7,33 +7,42 @@
 //
 
 import Foundation
-import Network
+import SystemConfiguration
 
 /// Checks internet connectivity status through out the life cycle of the app
-struct NetworkReachability {
+class NetworkReachability {
     
     static var shared = NetworkReachability()
     
-    /// To check if the  phone is connected to internet and notification "networkReachability" is fired on connectivity status changed
-    var isConnected = true {
-        didSet {
-            let connectionStatus = isConnected
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationNames.networkReachability), object: connectionStatus)
-        }
-    }
+    var isConnectedToNetwork: Bool = false
+    private var requestCompletion: ((Bool)->())?
     
     /// priavte init so that there's only one object of *NetworkReachability* accessable via *shared* staticvaribale
-    private init(){
-        startCheckingForConnectivity()
+    private init(){}
+    
+    /// Checks if connected to internet or not
+    func checkNetworkConnection(result: @escaping ((Bool)->())) {
+        guard let url = URL(string: "http://google.com/") else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 10.0
+        let session = URLSession.shared
+        requestCompletion = result
+        session.dataTask(with: request, completionHandler: {(data, response, error) in
+            self.handleRequestResponse(response: response as? HTTPURLResponse)
+        }).resume()
     }
     
-    /// continuously checks internet connectivity status and
-    private func startCheckingForConnectivity() {
-        let networkMoniter = NWPathMonitor()
-        let queue = DispatchQueue.global(qos: .background)
-        networkMoniter.start(queue: queue)
-        networkMoniter.pathUpdateHandler = { path in
-            NetworkReachability.shared.isConnected = path.status == .satisfied
+    func handleRequestResponse(response: HTTPURLResponse?) {
+        guard let httpResponse = response else {
+            requestCompletion?(false)
+            return
         }
+        let result = httpResponse.statusCode == 200
+        isConnectedToNetwork = result
+        requestCompletion?(result)
     }
 }
