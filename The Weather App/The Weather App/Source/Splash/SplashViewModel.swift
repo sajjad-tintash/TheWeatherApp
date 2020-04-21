@@ -15,8 +15,8 @@ class SplashViewModel: ObservableObject {
     /// A plublished property, set true when application is ready to launch home screen
     @Published private(set) var shouldNavigateToHome: Bool = false
     
-    /// Holds offline weather data
-    private(set) var offlineData: CityWeatherModel = CityWeatherModel(weatherDateMap: []) {
+    /// Holds weather data
+    private(set) var weatherData: CityWeatherModel = CityWeatherModel(weatherDateMap: []) {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
                 self?.shouldNavigateToHome = true
@@ -24,12 +24,23 @@ class SplashViewModel: ObservableObject {
         }
     }
     
+    /// Holds app mode
+    private(set) var mode: AppMode = .offline
+    
     /// Service that fetches offline weather data
     fileprivate var weatherService: WeatherService = WeatherServiceFactory.weatherService(nil)
         
     func fetch(){
-        weatherService.fetchWeatherForCity(nil) { [weak self]  result in
-            self?.handlerForcastResponse(result: result)
+        if NetworkReachability.shared.isConnected {
+            mode = .live
+            weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
+            weatherService.fetchWeatherForCity(String(WeatherAPIKey.defaultCity.id ?? 1172451)) { [weak self]  result in
+                self?.handlerForcastResponse(result: result)
+            }
+        } else {
+            weatherService.fetchWeatherForCity(nil) { [weak self]  result in
+                self?.handlerForcastResponse(result: result)
+            }
         }
     }
 }
@@ -48,10 +59,10 @@ extension SplashViewModel: ForcastMappable {
                 return
             }
             let dateWeatherMap = mapForcastsToDate(forcasts)
-            offlineData = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+            weatherData = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
         case .failure(_):
             //TODO:- propagate error
-            offlineData = MockData.cityWeatherModel
+            weatherData = MockData.cityWeatherModel
         }
     }
 }

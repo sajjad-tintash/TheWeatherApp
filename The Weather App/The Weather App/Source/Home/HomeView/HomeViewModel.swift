@@ -65,10 +65,23 @@ class HomeViewModel: ObservableObject {
         liveModel = (mode == .live) ? model : nil
         offlineModel = (mode == .offline) ? model : nil
         
+        if mode == .live {
+            fetchOfflineData()
+        }
+        
         fetchAllCities()
     }
 }
 
+extension HomeViewModel {
+    func fetchOfflineData() {
+        guard offlineModel == nil else { return }
+        weatherService = WeatherServiceFactory.weatherService(nil)
+        weatherService.fetchWeatherForCity(nil) { [weak self]  result in
+            self?.handlerForcastResponse(result: result, forMode: .offline)
+        }
+    }
+}
 
 //MARK:- Setter for properties
 extension HomeViewModel {
@@ -150,8 +163,9 @@ extension HomeViewModel: ForcastMappable {
         guard let cityId = city?.id else {
             return
         }
+        weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
         weatherService.fetchWeatherForCity(String(cityId)) { [weak self]  result in
-            self?.handlerForcastResponse(result: result)
+            self?.handlerForcastResponse(result: result, forMode: .live)
         }
     }
     
@@ -159,14 +173,21 @@ extension HomeViewModel: ForcastMappable {
     /// - Parameters:
     ///   - forcastResult: forcast data
     ///   - error: error description string
-    fileprivate func handlerForcastResponse(result: WeatherServiceResult) {
+    fileprivate func handlerForcastResponse(result: WeatherServiceResult, forMode: AppMode) {
         switch result {
         case .success(let forcastResult):
             if let forcasts = forcastResult?.list {
                 let dateWeatherMap = mapForcastsToDate(forcasts)
-                liveModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+                let fetchedModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+                if forMode == .live {
+                    liveModel = fetchedModel
+                } else {
+                    offlineModel =  fetchedModel
+                }
                 updateModel(mode)
-                isLoadingCity = false
+                if forMode == .live {
+                    isLoadingCity = false
+                }
                 DispatchQueue.main.async {
                     self.objectWillChange.send()
                 }
