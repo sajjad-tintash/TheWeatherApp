@@ -105,6 +105,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(model: DummyHomeData.cityWeatherModel, mode: .offline))
+        HomeView(viewModel: HomeViewModel(model: MockData.cityWeatherModel, mode: .offline))
     }
 }

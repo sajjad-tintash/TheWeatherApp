@@ -42,6 +42,6 @@ struct ForcastTileView: View {
 
 struct ForcastTileView_Previews: PreviewProvider {
     static var previews: some View {
-        ForcastTileView(viewModel: ForcastTileViewModel(model: DummyHomeData.forcast))
+        ForcastTileView(viewModel: ForcastTileViewModel(model: MockData.forcast))
     }
 }

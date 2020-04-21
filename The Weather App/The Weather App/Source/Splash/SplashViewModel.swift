@@ -38,7 +38,7 @@ extension SplashViewModel: ForcastMappable {
     func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
         if let _ = error {
             //TODO:- propagate error
-            offlineData = DummyHomeData.cityWeatherModel
+            offlineData = MockData.cityWeatherModel
         } else if let forcasts = forcastResult?.list {
             let dateWeatherMap = mapForcastsToDate(forcasts)
             offlineData = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)

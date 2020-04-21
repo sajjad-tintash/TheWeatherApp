@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DummyHomeData {
+enum MockData {
     static let particular: WeatherParticular = {
         WeatherParticular(temp: 37.0, tempMin: nil, tempMax: nil, pressure: nil, seaLevel: nil, humidity: nil)
     }()

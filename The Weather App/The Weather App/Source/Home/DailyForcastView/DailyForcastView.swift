@@ -33,6 +33,6 @@ struct DailyForcastView: View {
 
 struct DailyForcastView_Previews: PreviewProvider {
     static var previews: some View {
-        DailyForcastView(viewModel: DailyForcastViewModel(model: DummyHomeData.weatherDataForOneDay))
+        DailyForcastView(viewModel: DailyForcastViewModel(model: MockData.weatherDataForOneDay))
     }
 }
