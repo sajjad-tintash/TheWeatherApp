@@ -33,6 +33,9 @@ extension LiveWeatherService: DecodesDataToModel {
                         completion(.failure(ServiceError.failed))
                         return
                     }
+                    if let cityID: Int = forcastResult.city?.id {
+                        PreferenceService().setRecentSearchedCityId(value: cityID)
+                    }
                     completion(.success(forcastResult))
                 } catch {
                     completion(.failure(ServiceError.unableToDecode))
