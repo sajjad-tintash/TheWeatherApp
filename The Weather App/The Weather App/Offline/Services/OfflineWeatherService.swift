@@ -17,12 +17,12 @@ struct OfflineWeatherService: WeatherService, ReadsJsonFromFile, DecodesDataToMo
         do {
             let jsonData = try dataFromJsonFile("lahore")
             guard let data = jsonData else {
-                completion(nil,NetworkResponse.badRequest.rawValue)
+                completion(nil,ServiceError.badRequest.localizedDescription)
                 return
             }
             let forcastResultModel : ForcastResult? = try self.decodeModel(data: data)
             guard var forcastResult = forcastResultModel else {
-                completion(nil, NetworkResponse.noData.rawValue)
+                completion(nil, ServiceError.noData.localizedDescription)
                 return
             }
             forcastResult.list = convertToCelciusIfRequired(forcastResult.list)

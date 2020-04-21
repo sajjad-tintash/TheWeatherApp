@@ -16,15 +16,34 @@ enum NetworkEnvironment {
     case development
 }
 
-/// Defines network response status and provides error strings for network request error
-enum NetworkResponse: String {
+/// Defines service response status and provides error strings for network request error
+enum ServiceError: Error {
     case success
-    case authenticationError    = "Authentication Error"
-    case badRequest             = "Bad Request"
-    case failed                 = "Network request Failed"
-    case noData                 = "No Data Found"
-    case unableToDecode         = "Decoding Error"
-    case noInternet             = "No Internet Connectivity."
+    case authenticationError
+    case badRequest
+    case failed
+    case noData
+    case unableToDecode
+    case noInternet
+    
+    var localizedDescription: String {
+        switch self {
+        case .authenticationError:
+            return "Authentication Error"
+        case .badRequest:
+            return "Bad Request"
+        case .failed:
+            return "Network request Failed"
+        case .noData:
+            return "No Data Found"
+        case .unableToDecode:
+            return "Decoding Error"
+        case .noInternet:
+            return "No Internet Connectivity."
+        case .success:
+            return "Success"
+        }
+    }
 }
 
 typealias NetworkCompletionBlock = (_ data: Data?,_ error: String?)-> ()
@@ -40,7 +59,7 @@ extension NetworkHandler {
     
     /// Checks URLResponse statusCode and returns a *NetworkResponse* case depending upon status
     /// - Parameter urlResponse: URLResponse received back from URLTask
-    private func parseHTTPResponse(_ urlResponse:HTTPURLResponse) -> NetworkResponse {
+    private func parseHTTPResponse(_ urlResponse:HTTPURLResponse) -> ServiceError {
         switch urlResponse.statusCode {
         case 200...299:
             return .success
@@ -73,12 +92,12 @@ extension NetworkHandler {
     private func parseURLRequestData(data: Data?, response: URLResponse?, error: Error?, completion: @escaping NetworkCompletionBlock) {
         
         if let _ = error {
-            completion(nil, NetworkResponse.noInternet.rawValue)
+            completion(nil, ServiceError.noInternet.localizedDescription)
             return
         }
         
         guard let httpURLResponse = response as? HTTPURLResponse else {
-            completion(nil, NetworkResponse.failed.rawValue)
+            completion(nil, ServiceError.failed.localizedDescription)
             return
         }
         
@@ -86,12 +105,12 @@ extension NetworkHandler {
         switch networkResponse {
         case .success:
             guard let data = data else {
-                completion(nil, NetworkResponse.noData.rawValue)
+                completion(nil, ServiceError.noData.localizedDescription)
                 return
             }
             completion(data, nil)
         default:
-            completion(nil, networkResponse.rawValue)
+            completion(nil, networkResponse.localizedDescription)
         }
     }
 }

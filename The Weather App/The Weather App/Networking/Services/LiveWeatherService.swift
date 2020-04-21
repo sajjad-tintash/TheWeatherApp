@@ -29,12 +29,12 @@ extension LiveWeatherService: DecodesDataToModel {
             do {
                 let forcastResultModel : ForcastResult? = try self.decodeModel(data: data)
                 guard let forcastResult = forcastResultModel, let code = forcastResult.cod, code == "200" else {
-                    completion(nil, NetworkResponse.failed.rawValue)
+                    completion(nil, ServiceError.failed.localizedDescription)
                     return
                 }
                 completion(forcastResult, nil)
             } catch {
-                completion(nil, NetworkResponse.unableToDecode.rawValue)
+                completion(nil, ServiceError.unableToDecode.localizedDescription)
             }
         })
     }

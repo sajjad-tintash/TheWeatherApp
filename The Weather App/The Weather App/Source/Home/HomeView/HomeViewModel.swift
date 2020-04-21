@@ -94,9 +94,18 @@ extension HomeViewModel {
     
     /// Calls offline service to fetch all cities
     fileprivate func fetchAllCities() {
-        offlineCityService.fetchCities { [weak self] (cities, error) in
-            guard error == nil, let cities = cities else { return }
-            self?.allCities = cities.compactMap({$0})
+        offlineCityService.fetchCities { [weak self] result in
+            switch result {
+            case .success(let cities):
+                guard let cities = cities else {
+                    //TODO:- Handle this case
+                    return
+                }
+                self?.allCities = cities.compactMap({$0})
+            case .failure( _):
+                //TODO:- Propagate error
+                break
+            }
         }
     }
     

@@ -41,7 +41,7 @@ extension ImageService {
             if let image = UIImage(data: data) {
                 completion(.success(image))
             } else {
-                completion(.failure(NetworkResponse.unableToDecode.rawValue))
+                completion(.failure(ServiceError.unableToDecode.localizedDescription))
             }
         })
     }

@@ -8,7 +8,9 @@
 
 import Foundation
 
-typealias CityCompletionBlock = (_ forcast: [City?]?,_ error: String?)-> ()
+typealias OfflineFetchResult = Result<[City?]?, Error>
+
+typealias CityCompletionBlock = (OfflineFetchResult)-> ()
 
 /// Reads bundled cities json file which holds all the cities supported by *Open Weather API*
 struct OfflineCityService: ReadsJsonFromFile, DecodesDataToModel {
@@ -19,17 +21,17 @@ struct OfflineCityService: ReadsJsonFromFile, DecodesDataToModel {
         do {
             let jsonData = try dataFromJsonFile("cities")
             guard let data = jsonData else {
-                completion(nil,NetworkResponse.badRequest.rawValue)
+                completion(.failure(ServiceError.badRequest))
                 return
             }
             let citiesList : [City?]? = try self.decodeModel(data: data)
             guard let cities = citiesList else {
-                completion(nil, NetworkResponse.noData.rawValue)
+                completion(.failure(ServiceError.noData))
                 return
             }
-            completion(cities, nil)
+            completion(.success(cities))
         } catch (let error){
-            completion(nil, error.localizedDescription)
+            completion(.failure(error))
         }
     }
 }
