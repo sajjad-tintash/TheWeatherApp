@@ -9,11 +9,15 @@
 import Foundation
 import UIKit
 
+/// Single time slot forcast view's view model
 class ForcastTileViewModel: ObservableObject {
     
-    @Published private(set) var model: Forcast
+    /// Holds forcast information
+    private(set) var model: Forcast
+    /// Publised property, set when image is downloaded/fetched from cache
     @Published private(set) var image: UIImage = UIImage()
     
+    /// Service that download image
     fileprivate var imageService: ImageService = ImageService(NetworkHandler())
     
     init(model: Forcast) {
@@ -21,6 +25,7 @@ class ForcastTileViewModel: ObservableObject {
         load()
     }
     
+    /// Loads image
     func load() {
         guard !setCachedImage() else {
             return
@@ -38,12 +43,14 @@ class ForcastTileViewModel: ObservableObject {
         }
     }
     
+    /// Cancel service request
     func cancel(){
         imageService.cancel()
     }
 }
 
 extension ForcastTileViewModel {
+    /// Sets image to property from cache
     fileprivate func setCachedImage() -> Bool {
         let cache = ImageCache.shared
         guard let path = model.weather?.first??.icon else {
@@ -56,6 +63,8 @@ extension ForcastTileViewModel {
         return true
     }
     
+    /// Sets downloaded image and caches it
+    /// - Parameter image: downloaded image
     fileprivate func setDownloadedImage(_ image: UIImage) {
         cacheImage(image)
         setImage(image)

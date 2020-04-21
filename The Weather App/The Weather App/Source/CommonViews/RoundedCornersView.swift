@@ -9,6 +9,7 @@
 import Foundation
 import SwiftUI
 
+/// A utility view that with properties to all four round corners with different corner redii
 struct RoundedCornersView: View {
     var color: Color = .blue
     var tl: CGFloat = 0.0

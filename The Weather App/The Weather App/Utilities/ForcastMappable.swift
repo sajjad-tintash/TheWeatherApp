@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Converts Forcast data into date wise mapping
+/// Conforming types can  either give implementation or use default implementation
 protocol ForcastMappable {
     func mapForcastsToDate(_ forcasts: [Forcast?]) -> [WeatherDateMap]
 }
@@ -41,7 +43,7 @@ extension ForcastMappable {
             return WeatherDateMap(date: key, forcasts: value)
         }
         
-        dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date > $1.date })
+        dateWiseForcasts = dateWiseForcasts.sorted(by: { $0.date < $1.date })
         return dateWiseForcasts
     }
 }

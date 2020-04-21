@@ -9,8 +9,9 @@
 import SwiftUI
 import Combine
 
+/// Splash screen
 struct SplashView: View {
-
+    
     @ObservedObject private var viewModel = SplashViewModel()
     
     let gradientColors = Gradient(colors: [

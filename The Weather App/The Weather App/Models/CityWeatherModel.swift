@@ -8,12 +8,14 @@
 
 import Foundation
 
+/// Holds a date and associated *Array* of *Forcast* objects
 struct WeatherDateMap: Identifiable {
     let id: UUID = UUID()
     let date: Date
     let forcasts: [Forcast]
 }
 
+/// Holds information of  *City* aand its weather in the form of *Array* of *WeatherDateMap* objects
 struct CityWeatherModel {
     var weatherDateMap: [WeatherDateMap]
     var city: City?

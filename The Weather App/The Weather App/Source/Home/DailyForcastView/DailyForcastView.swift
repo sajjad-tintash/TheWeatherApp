@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// Shows horizontal scrollable list of *ForcastTileView*
 struct DailyForcastView: View {
 
     @ObservedObject private(set) var viewModel: DailyForcastViewModel

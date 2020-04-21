@@ -9,30 +9,43 @@
 import Foundation
 import SwiftUI
 
+/// main home screen's view model
 class HomeViewModel: ObservableObject {
     
+    /// Datasource, holds information of city and its weather forcast being shown on screen
     private(set) var model: CityWeatherModel
+    
+    /// Published property, user can switch it to live and offline
     @Published var mode: AppMode {
         willSet(newValue) {
             updateModel(newValue)
         }
     }
+    
+    /// Search query string
     var searchText: String = "" {
         didSet {
            filterCityBasedOnSearch(searchText)
         }
     }
     
+    /// Data model containing live city and weather information
     private var liveModel: CityWeatherModel?
+    /// Data model containing offline city and weather information
     private var offlineModel: CityWeatherModel?
     
     //MARK:- Properties for city search
+    /// Service that fetches list of cities
     let offlineCityService:  OfflineCityService = OfflineCityService()
+    /// Array containing list of all cities
     private var allCities: [City] = []
     
+    /// Service that fetches weather data of a city
     var weatherService = WeatherServiceFactory.weatherService(NetworkHandler())
     
+    /// Published property, sets with list of cities filtered based on search query
     @Published var filteredCities: [City] = []
+    /// city selected by user after search
     var selectedCity: City? {
         didSet {
             isLoadingCity = true
@@ -41,8 +54,8 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// Flag that indicates whether a service is loading city or not
     var isLoadingCity: Bool = false
-    
     
     //MARK:- Initializer
     init(model: CityWeatherModel, mode: AppMode) {
@@ -59,7 +72,9 @@ class HomeViewModel: ObservableObject {
 
 //MARK:- Setter for properties
 extension HomeViewModel {
-    func updateModel(_ updatedMode: AppMode) {
+    /// Updates model based on state, sets live model to base model if provided mode was live else sets offline model
+    /// - Parameter updatedMode: app mode
+    fileprivate func updateModel(_ updatedMode: AppMode) {
         guard let dataModel = (updatedMode == .live) ? liveModel : offlineModel else {
             model = CityWeatherModel(weatherDateMap: [], city: nil)
             return
@@ -70,19 +85,24 @@ extension HomeViewModel {
 
 //MARK:- City search
 extension HomeViewModel {
+    /// Returns name of city at provided index
+    /// - Parameter index: index
     func nameAtIndex(_ index: Int) -> String {
         guard (0 ..< filteredCities.count).contains(index) else { return "" }
         return filteredCities[index].fullName ?? ""
     }
     
-    func fetchAllCities() {
+    /// Calls offline service to fetch all cities
+    fileprivate func fetchAllCities() {
         offlineCityService.fetchCities { [weak self] (cities, error) in
             guard error == nil, let cities = cities else { return }
             self?.allCities = cities.compactMap({$0})
         }
     }
     
-    func filterCityBasedOnSearch(_ searchTerm: String) {
+    /// Filters all cities based on provided search term, uses Levenshtein's distance
+    /// - Parameter searchTerm: search term string
+    fileprivate func filterCityBasedOnSearch(_ searchTerm: String) {
         clearFilteredList()
         guard searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).count > SearchTerm.minimumSearchTermCharacters else { return }
         let searchTerm = searchTerm.lowercased()
@@ -100,7 +120,8 @@ extension HomeViewModel {
         filteredCities = sortedList
     }
     
-    func clearFilteredList() {
+    /// Resets filtered cities list
+    fileprivate func clearFilteredList() {
         guard searchText.count < SearchTerm.minimumSearchTermCharacters, !filteredCities.isEmpty else { return }
         filteredCities = []
     }
@@ -108,11 +129,15 @@ extension HomeViewModel {
 
 
 extension HomeViewModel: ForcastMappable {
+    /// Setter, sets selected city
+    /// - Parameter city: *City*
     func selectCity(_ city: City) {
         selectedCity = city
     }
     
-    func fetchWeatherForCity(_ city: City?) {
+    /// Calls weather service to fetch weather of provided city
+    /// - Parameter city: *City*
+    fileprivate func fetchWeatherForCity(_ city: City?) {
         guard let cityId = city?.id else {
             return
         }
@@ -122,7 +147,11 @@ extension HomeViewModel: ForcastMappable {
         }
     }
     
-    func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
+    /// Handles response of weather service's fetch request
+    /// - Parameters:
+    ///   - forcastResult: forcast data
+    ///   - error: error description string
+    fileprivate func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
         if let error = error {
             //TODO:- Propagate Error
             print(error)

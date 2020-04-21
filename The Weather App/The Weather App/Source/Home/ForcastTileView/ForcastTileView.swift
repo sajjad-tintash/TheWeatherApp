@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// View that shows forcast of a single time slot
 struct ForcastTileView: View {
     
     @ObservedObject private(set) var viewModel: ForcastTileViewModel

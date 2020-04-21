@@ -31,6 +31,7 @@ enum SearchTerm {
     static let minimumSearchTermCharacters = 3
 }
 
+/// Holds state of app, i.e., online or offline
 enum AppMode: Int, Identifiable, CaseIterable {
     case live = 1, offline = 0
     

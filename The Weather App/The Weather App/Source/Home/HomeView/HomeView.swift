@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// The main home screen of app that shows weather forcast for both live and offline modes
 struct HomeView: View {
     @ObservedObject private(set) var viewModel: HomeViewModel
 

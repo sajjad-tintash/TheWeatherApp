@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Holds mock data to be used in app
 enum MockData {
     static let particular: WeatherParticular = {
         WeatherParticular(temp: 37.0, tempMin: nil, tempMax: nil, pressure: nil, seaLevel: nil, humidity: nil)

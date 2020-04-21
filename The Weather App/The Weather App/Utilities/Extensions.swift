@@ -26,6 +26,7 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    /// Returns string with day and date
     func dayAndDateStringWithoutTime() -> String {
         let dateWithoutTime = dateStringWithoutTime()
         let weekDay = Calendar.current.component(.weekday, from: self)
@@ -43,6 +44,11 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
+    /// Uses Leveenshtein algorithm to calculate distance score with a string
+    /// - Parameters:
+    ///   - string: to compare with
+    ///   - ignoreCase: boolean
+    ///   - trimWhiteSpacesAndNewLines: boolean
     func levenshteinDistanceScore(to string: String, ignoreCase: Bool = true, trimWhiteSpacesAndNewLines: Bool = true) -> Double {
 
         var firstString = self
@@ -84,16 +90,5 @@ extension Double {
     /// - Parameter f: String with required number of decimal places, for  example "0.2" for two decimal places
     func format(f: String) -> String {
         return String(format: "%\(f)f", self)
-    }
-}
-
-
-extension View {
-    func inExpandingRectangle() -> some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.clear)
-            self
-        }
     }
 }

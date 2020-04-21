@@ -10,6 +10,7 @@ import Foundation
 
 class DailyForcastViewModel: ObservableObject {
     
+    /// Holds information of date and corresponding list of *Forcast* objects
     @Published private(set) var model: WeatherDateMap
     
     init(model: WeatherDateMap) {

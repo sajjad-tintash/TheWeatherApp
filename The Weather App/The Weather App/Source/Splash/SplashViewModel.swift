@@ -9,10 +9,13 @@
 import Foundation
 import Combine
 
+/// Splash screen view model
 class SplashViewModel: ObservableObject {
-
+    
+    /// A plublished property, set true when application is ready to launch home screen
     @Published private(set) var shouldNavigateToHome: Bool = false
-        
+    
+    /// Holds offline weather data
     private(set) var offlineData: CityWeatherModel = CityWeatherModel(weatherDateMap: []) {
         didSet {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
@@ -20,6 +23,8 @@ class SplashViewModel: ObservableObject {
             }
         }
     }
+    
+    /// Service that fetches offline weather data
     fileprivate var weatherService: WeatherService = WeatherServiceFactory.weatherService(nil)
         
     func fetch(){
@@ -27,9 +32,9 @@ class SplashViewModel: ObservableObject {
             self?.handlerForcastResponse(forcastResult, error: error)
         }
     }
-    
 }
 
+/// Conforms to *ForcastMappable*
 extension SplashViewModel: ForcastMappable {
     /// Handles Forcast Service completion block
     /// - Parameters:

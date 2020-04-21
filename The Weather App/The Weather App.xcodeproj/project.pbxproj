@@ -134,7 +134,6 @@
 		B40D12972434C41C00985C4C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B499D38D244200FB00236537 /* CityWeatherModel.swift */,
 				B4C7144B2440AD9F008ECEA3 /* ForcastTileView */,
 				B4C7144C2440ADBF008ECEA3 /* DailyForcastView */,
 				B4C7144A2440AD8E008ECEA3 /* HomeView */,
@@ -338,6 +337,7 @@
 				B442CA842434BFF900605DAA /* ForcastResult.swift */,
 				B442CA862434BFF900605DAA /* Weather.swift */,
 				B442CA832434BFF900605DAA /* WeatherParticular.swift */,
+				B499D38D244200FB00236537 /* CityWeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
