@@ -28,8 +28,8 @@ class SplashViewModel: ObservableObject {
     fileprivate var weatherService: WeatherService = WeatherServiceFactory.weatherService(nil)
         
     func fetch(){
-        weatherService.fetchWeatherForCity(nil) { [weak self]  (forcastResult, error) in
-            self?.handlerForcastResponse(forcastResult, error: error)
+        weatherService.fetchWeatherForCity(nil) { [weak self]  result in
+            self?.handlerForcastResponse(result: result)
         }
     }
 }
@@ -40,13 +40,18 @@ extension SplashViewModel: ForcastMappable {
     /// - Parameters:
     ///   - forcastResult: ForcastResult  from weather service
     ///   - error: error srting from weather service
-    func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
-        if let _ = error {
-            //TODO:- propagate error
-            offlineData = MockData.cityWeatherModel
-        } else if let forcasts = forcastResult?.list {
+    func handlerForcastResponse(result: WeatherServiceResult) {
+        switch result {
+        case .success(let forcastResult):
+            guard let forcasts = forcastResult?.list else {
+                //TODO:- propagate noData error
+                return
+            }
             let dateWeatherMap = mapForcastsToDate(forcasts)
             offlineData = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+        case .failure(_):
+            //TODO:- propagate error
+            offlineData = MockData.cityWeatherModel
         }
     }
 }

@@ -10,27 +10,27 @@ import Foundation
 
 /// Reads bundled weather API result json file
 struct OfflineWeatherService: WeatherService, ReadsJsonFromFile, DecodesDataToModel {
-    
     /// Reads bundled weather API result json file and decods into decodable *ForcastResult* model
     /// - Parameter completion: Completion closure with  *ForcastResult*  objects or error string
-    func fetchWeather(_ completion: @escaping WeatherCompletionBlock) {
+    func fetchWeather(_ completion: @escaping WeatherRequestCompletion) {
         do {
             let jsonData = try dataFromJsonFile("lahore")
             guard let data = jsonData else {
-                completion(nil,ServiceError.badRequest.localizedDescription)
+                completion(.failure(ServiceError.badRequest))
                 return
             }
             let forcastResultModel : ForcastResult? = try self.decodeModel(data: data)
             guard var forcastResult = forcastResultModel else {
-                completion(nil, ServiceError.noData.localizedDescription)
+                completion(.failure(ServiceError.noData))
                 return
             }
             forcastResult.list = convertToCelciusIfRequired(forcastResult.list)
-            completion(forcastResult, nil)
+            completion(.success(forcastResult))
         } catch (let error){
-            completion(nil, error.localizedDescription)
+            completion(.failure(error))
         }
     }
+    
     func convertToCelciusIfRequired(_ forcasts: [Forcast?]?) -> [Forcast?]? {
         let locale = NSLocale.current as NSLocale
         guard let unitStr = locale.object(forKey: NSLocale.Key(rawValue: NotificationNames.kCFLocaleTemperatureUnitKey)) as? String, unitStr.lowercased() == "celsius" else { return forcasts }

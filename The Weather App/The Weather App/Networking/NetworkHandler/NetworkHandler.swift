@@ -46,7 +46,8 @@ enum ServiceError: Error {
     }
 }
 
-typealias NetworkCompletionBlock = (_ data: Data?,_ error: String?)-> ()
+typealias NetworkRequestResult = Result<Data?, Error>
+typealias NetworkServiceCompletion = (NetworkRequestResult)-> ()
 
 
 /// Provides network request creation and routing
@@ -76,10 +77,10 @@ extension NetworkHandler {
     /// - Parameter endPoint: Must be a type confirming EndPointType protocol
     /// - Parameter completion: returns data or error string
     @discardableResult
-    func fetchData<EndPoint>(_ endPoint: EndPoint, completion: @escaping NetworkCompletionBlock) -> URLSessionTask? where EndPoint:EndPointType{
+    func fetchData<EndPoint>(_ endPoint: EndPoint, completion: @escaping NetworkServiceCompletion) -> URLSessionTask? where EndPoint:EndPointType{
         router.request(endPoint: endPoint as! WeatherAPI) {(data, response, error) in
-            self.parseURLRequestData(data: data, response: response, error: error) { (data, error) in
-                completion(data, error)
+            self.parseURLRequestData(data: data, response: response, error: error) { result in
+                completion(result)
             }
         }
     }
@@ -89,15 +90,15 @@ extension NetworkHandler {
     /// - Parameter response: URLResponse object received in URLRequest completion closure
     /// - Parameter error: Error object received in URLRequest completion closure
     /// - Parameter completion: completion closure with Data object or error string
-    private func parseURLRequestData(data: Data?, response: URLResponse?, error: Error?, completion: @escaping NetworkCompletionBlock) {
+    private func parseURLRequestData(data: Data?, response: URLResponse?, error: Error?, completion: @escaping NetworkServiceCompletion) {
         
         if let _ = error {
-            completion(nil, ServiceError.noInternet.localizedDescription)
+            completion(.failure(ServiceError.noInternet))
             return
         }
         
         guard let httpURLResponse = response as? HTTPURLResponse else {
-            completion(nil, ServiceError.failed.localizedDescription)
+            completion(.failure(ServiceError.failed))
             return
         }
         
@@ -105,12 +106,12 @@ extension NetworkHandler {
         switch networkResponse {
         case .success:
             guard let data = data else {
-                completion(nil, ServiceError.noData.localizedDescription)
+                completion(.failure(ServiceError.noData))
                 return
             }
-            completion(data, nil)
+            completion(.success(data))
         default:
-            completion(nil, networkResponse.localizedDescription)
+            completion(.failure(networkResponse))
         }
     }
 }

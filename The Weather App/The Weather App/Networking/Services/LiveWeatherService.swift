@@ -17,24 +17,28 @@ struct LiveWeatherService: WeatherService {
 }
 
 extension LiveWeatherService: DecodesDataToModel {
-    
     /// Fetches the list of cras using the *WeatherAPI * *forcast* end point
     /// - Parameter completion: Completion closure with  *ForcastResult*  objects or error string
-    func fetchWeatherForCity(_ cityId: String, completion: @escaping WeatherCompletionBlock) {
-        networkHandler.fetchData(WeatherAPI.forcast(city: cityId), completion: {(data, error) in
-            guard let data = data else {
-                completion(nil,error)
-                return
-            }
-            do {
-                let forcastResultModel : ForcastResult? = try self.decodeModel(data: data)
-                guard let forcastResult = forcastResultModel, let code = forcastResult.cod, code == "200" else {
-                    completion(nil, ServiceError.failed.localizedDescription)
+    func fetchWeatherForCity(_ cityId: String, completion: @escaping WeatherRequestCompletion) {
+        networkHandler.fetchData(WeatherAPI.forcast(city: cityId), completion: { result in
+            switch result {
+            case .success(let data):
+                guard let data = data else {
+                    completion(.failure(ServiceError.noData))
                     return
                 }
-                completion(forcastResult, nil)
-            } catch {
-                completion(nil, ServiceError.unableToDecode.localizedDescription)
+                do {
+                    let forcastResultModel : ForcastResult? = try self.decodeModel(data: data)
+                    guard let forcastResult = forcastResultModel, let code = forcastResult.cod, code == "200" else {
+                        completion(.failure(ServiceError.failed))
+                        return
+                    }
+                    completion(.success(forcastResult))
+                } catch {
+                    completion(.failure(ServiceError.unableToDecode))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         })
     }

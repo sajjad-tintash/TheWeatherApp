@@ -8,13 +8,14 @@
 
 import Foundation
 
-typealias WeatherCompletionBlock = (_ forcast: ForcastResult?,_ error: String?)-> ()
+typealias WeatherServiceResult = Result<ForcastResult?, Error>
+typealias WeatherRequestCompletion = (WeatherServiceResult)-> ()
 
 protocol WeatherService {
-    func fetchWeatherForCity(_ cityId: String?, completion: @escaping WeatherCompletionBlock)
+    func fetchWeatherForCity(_ cityId: String?, completion: @escaping WeatherRequestCompletion)
 }
 extension WeatherService {
-    func fetchWeatherForCity(_ cityId: String?, completion: @escaping WeatherCompletionBlock) {
+    func fetchWeatherForCity(_ cityId: String?, completion: @escaping WeatherRequestCompletion) {
         if let service = self as? LiveWeatherService {
             guard let cityId =  cityId else { return }
             service.fetchWeatherForCity(cityId, completion: completion)

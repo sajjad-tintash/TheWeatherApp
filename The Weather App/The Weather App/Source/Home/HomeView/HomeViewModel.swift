@@ -150,9 +150,8 @@ extension HomeViewModel: ForcastMappable {
         guard let cityId = city?.id else {
             return
         }
-        
-        weatherService.fetchWeatherForCity(String(cityId)) { [weak self]  (forcastResult, error) in
-            self?.handlerForcastResponse(forcastResult, error: error)
+        weatherService.fetchWeatherForCity(String(cityId)) { [weak self]  result in
+            self?.handlerForcastResponse(result: result)
         }
     }
     
@@ -160,18 +159,21 @@ extension HomeViewModel: ForcastMappable {
     /// - Parameters:
     ///   - forcastResult: forcast data
     ///   - error: error description string
-    fileprivate func handlerForcastResponse(_ forcastResult: ForcastResult?, error: String?) {
-        if let error = error {
+    fileprivate func handlerForcastResponse(result: WeatherServiceResult) {
+        switch result {
+        case .success(let forcastResult):
+            if let forcasts = forcastResult?.list {
+                let dateWeatherMap = mapForcastsToDate(forcasts)
+                liveModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
+                updateModel(mode)
+                isLoadingCity = false
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
+            }
+        case .failure(let error):
             //TODO:- Propagate Error
             print(error)
-        } else if let forcasts = forcastResult?.list {
-            let dateWeatherMap = mapForcastsToDate(forcasts)
-            liveModel = CityWeatherModel(weatherDateMap: dateWeatherMap, city: forcastResult?.city)
-            updateModel(mode)
-            isLoadingCity = false
-            DispatchQueue.main.async {
-                self.objectWillChange.send()
-            }
         }
     }
 }

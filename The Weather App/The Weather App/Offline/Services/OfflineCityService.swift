@@ -8,16 +8,14 @@
 
 import Foundation
 
-typealias OfflineFetchResult = Result<[City?]?, Error>
-
-typealias CityCompletionBlock = (OfflineFetchResult)-> ()
+typealias OfflineCityServiceResult = Result<[City?]?, Error>
+typealias OfflineCityRequestCompletion = (OfflineCityServiceResult)-> ()
 
 /// Reads bundled cities json file which holds all the cities supported by *Open Weather API*
 struct OfflineCityService: ReadsJsonFromFile, DecodesDataToModel {
-    
     /// Reads bundled cities json file and decods into decodable *City* model array
     /// - Parameter completion: Completion closure with optional array of *City*  objects or error string
-    func fetchCities(_ completion: @escaping CityCompletionBlock) {
+    func fetchCities(_ completion: @escaping OfflineCityRequestCompletion) {
         do {
             let jsonData = try dataFromJsonFile("cities")
             guard let data = jsonData else {

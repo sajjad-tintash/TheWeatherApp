@@ -9,12 +9,9 @@
 import Foundation
 import UIKit
 
-enum ImageServiceResult {
-    case success(UIImage)
-    case failure(String?)
-}
 
-typealias ImageCompletionBlock = (ImageServiceResult)-> ()
+typealias ImageRequestResult = Result<UIImage, Error>
+typealias ImageServiceCompletion = (ImageRequestResult)-> ()
 
 /// Service for fetching weather icon from the network
 class ImageService {
@@ -29,19 +26,25 @@ class ImageService {
         fetchRequest?.cancel()
     }
 }
+
 extension ImageService {
     /// Fetches the weather image  using the *WeatherAPI * *weatherImage* end point
     /// - Parameter completion: completion closure with *UIImage*  or error string
-    func fetchImage(_ path: String, completion: @escaping ImageCompletionBlock) {
-        fetchRequest = networkHandler.fetchData(WeatherAPI.weatherImage(path: path), completion: {(data, error) in
-            guard let data = data else {
+    func fetchImage(_ path: String, completion: @escaping ImageServiceCompletion) {
+        fetchRequest = networkHandler.fetchData(WeatherAPI.weatherImage(path: path), completion: { result in
+            switch result {
+            case .success(let data):
+                guard let data = data else {
+                    completion(.failure(ServiceError.noData))
+                    return
+                }
+                if let image = UIImage(data: data) {
+                    completion(.success(image))
+                } else {
+                    completion(.failure(ServiceError.unableToDecode))
+                }
+            case .failure(let error):
                 completion(.failure(error))
-                return
-            }
-            if let image = UIImage(data: data) {
-                completion(.success(image))
-            } else {
-                completion(.failure(ServiceError.unableToDecode.localizedDescription))
             }
         })
     }
