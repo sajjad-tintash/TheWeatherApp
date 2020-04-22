@@ -16,6 +16,9 @@ App Presents information in the view about the temperature, time, date and weath
 - cities.json file size is around 20 MB and can be reduced by removing the coordinates for the cities as these are not being used. I used it for fetching the forcast by city id as recommended  in open weather API documentation, becuase of its sheer size the app takes a few seconds to load on first launch when this file is being loaded. This can be fixed by saving this file into coreData or realm offline database  and then making queries through that in auto complete. Other option is to shift to a service like Google places instead of bundling this cities.json file and use name search for city instead  of id search. But to save time I chose to bundle the json file.
 
 ## Sample Screens
+
+Screen at left side of images is from this repository and is creatred using SwiftUI and screen at right side of the images is from on old repository created using UIKit.
+
 <img src="Screenshots/normalmode.jpg" width="924" height="438"><img src="Screenshots/darkmode.jpg" width="924" height="438">
 
 ## Getting Started
