@@ -1,4 +1,4 @@
-# TheWeatherApp
+# TheWeatherApp - Using SwiftUI
 App Presents information in the view about the temperature, time, date and weather icon in a form of a list, where each row contains all forecasts for a certain day, scrollable of the screen to the right
 
 ### Features
@@ -30,7 +30,7 @@ You would need a macbook with XCode 11.x installed. I built the app with XCode 1
 
 - To be able to install the build on the iPhone you will be needing Apple Developer provisioning and certifcate. You can create your Apple developer account [here](https://developer.apple.com/).
 - You can create build on iOS 13.x or later simulator provided with the XCode 11.x or later.
-- To run the project Navigate to the *Weather* folder on your machine where you cloned it. And open the project using *Weather.xcodeproj* file.
+- To run the project Navigate to the *TheWeatherApp* folder on your machine where you cloned it. And open the project using *TheWeatherApp.xcodeproj* file.
 
 ## User Guide to use the app
 - On Launch if app is connected to the internet it automatically fetches forcast for deafult city.
@@ -53,7 +53,7 @@ You would need a macbook with XCode 11.x installed. I built the app with XCode 1
 
 ## Authors
 
-- **Arslan Faisal** - (https://github.com/arslanFaisal)
+- **Sajjad Haider** - (https://github.com/sajjadhaiderzaidi)
 
 ## License
 
